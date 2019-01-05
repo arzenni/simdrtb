@@ -1,0 +1,53 @@
+#modal input {
+  display:inline-block;
+  margin-left:10px;
+}
+
+#modal input.rm {
+  width:250px;
+}
+
+#modal label.kanan {
+  margin-left:20px;
+}
+
+.jarak {
+  margin-left:4px;
+}
+
+#modal input.rtw {
+  width:70px;
+}
+
+#modal .modal-body .col {
+  margin-top:7px;
+}
+
+#modal-1 {
+  overflow-y:initial;
+}
+
+.overflow-body {
+  overflow-y:auto;
+}
+
+#modal input {
+  background-color:#cbf0ff;
+}
+
+#modal label, #modal button {
+  font-size:20px;
+  color:#885c98;
+  font-family:'Alice';
+}
+
+.modal-title {
+  color:#885c98;
+  font-family:'Alice';
+  font-size:35px;
+}
+
+.modal-body {
+  background-color:#9efbda;
+}
+

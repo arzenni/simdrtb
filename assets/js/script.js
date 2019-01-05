@@ -16,10 +16,16 @@ $(function(){
             method: 'post',
             dataType: 'json',
             success: function(data){
-                // console.log(data);
-                $('#nik').val(data.nik);
-                $('#nama').val(data.nama);
-                $('#rt').val(data.rt);
+                 console.log(data);
+                 $('#nama').html(data.nama);
+                 $('noRm').html(data.noRm);
+                 $('#nik').html(data.nik);
+                 $('#ibu').html(data.ibu);
+                 $('#dusun').html(data.dsn);
+                $('#rt').html(data.rt);
+                $('#rw').html(data.rw);
+                $('jnsk').html(data.jnsk);
+                
             }
 
         });
