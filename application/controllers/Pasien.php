@@ -25,6 +25,10 @@
 
         public function detilpasien()
         {
+            // echo 'siyaph';
+            // echo $_POST['id'];
+
+            echo json_encode($this->Pasien_model->getbyId($_POST['id']));
             //$data['']
             //$data['pasien'] = $this->Pasien_model->getbyIdpasien($id);
         }

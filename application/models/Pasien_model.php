@@ -12,5 +12,13 @@
     //         $query = $this->db->get_where('pasien, alamat', 'pasien.noRm = '$id . ' and ' . 'alamat.noRm = ' $id);
     //         return $query->result_array();
     //    }
+        public function getbyId($id){
+            return $this->db->query("SELECT pasien.*, alamat.dsn, alamat.kelurahan, alamat.kecamatan, alamat.rt, alamat.rw, alamat.kota FROM pasien, alamat WHERE pasien.noRm = alamat.noRM AND pasien.noRm = ". $id)->row_array();
+            // $this->db->where('noRm', $id);
+            // $this->db->select('*');
+            // $this->db->from('blogs');
+            // $this->db->join('comments', 'comments.id = blogs.id');
+            // return 
+        }
     }
 
