@@ -1,7 +1,18 @@
 
 
     <h1>Pasien <?php echo $judul; ?></h1>
-
+    <div class="btn-group">
+  <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    Action
+  </button>
+  <div class="dropdown-menu">
+    <a class="dropdown-item" href="#">Action</a>
+    <a class="dropdown-item" href="#">Another action</a>
+    <a class="dropdown-item" href="#">Something else here</a>
+    <div class="dropdown-divider"></div>
+    <a class="dropdown-item" href="#">Separated link</a>
+  </div>
+</div>
     <button type="button" class="btn btn-primary modaltambah" data-toggle="modal" href="<?php echo base_url(); ?> pasien/tambahpasien" data-target="#modal-1">
                         Tambah Pasien
                         </button>
@@ -52,6 +63,51 @@
         </tbody>
     </table>
 
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>NIK</th>
+                <th>No. Rekam Medis</th>
+                <th>Nama</th>
+                <th>Jenis Kelamin</th>
+                <th>Ibu Kandung</th>
+                <th>Kecamatan</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php foreach($pasien as $psn) :?>
+            <tr>
+                <td>
+                    <?php echo $psn['nik'];?>
+                </td>
+                <td>
+                    <?php echo $psn['noRm'];?>
+                </td>
+                <td>
+                    <?= $psn['nama'];?>
+                </td>
+                <td>
+                    <?= $psn['jnsK'];?>
+                </td>
+                <td>
+                    <?= $psn['ibu'];?>
+                </td>
+                <td> 
+                    <?= $psn['kecamatan'];?>
+                </td>
+                <td> 
+                        <button type="button" class="btn btn-primary modaltampil" data-toggle="modal" href="<?php echo base_url(); ?> pasien" data-id="<?= $psn['noRm']; ?>" data-target="#modaldetil">
+                        Detil
+                        </button>
+                </td>
+                <td><button type="button" class="btn btn-primary modaledit" data-toggle="modal" data-id="<?= $psn['noRm']; ?>" data-target="#modal-1">
+                edit
+                </button></td>
+            </tr>
+            <?php endforeach; ?>
+        </tbody>
+    </table>
 
     <!--mdal tambahedit -->
     <div id="modal">
@@ -62,6 +118,7 @@
                     <div class="modal-header" style="background-color:#83eded;">
                         <h4 class="modal-title">Data Pasien</h4><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button></div>
                         <div class="modal-body overflow-body">
+                            <?= validation_errors(); ?>
                                 <div class="col form-group row"><label class="col-sm-3 col-form-label">No. Rekam Medis&nbsp;</label><input id="inoRm" class="form-control col-sm-8" type="number" name="noRm"></div>
                                 <div class="col form-group row"><label class="col-sm-3 col-form-label">Nama&nbsp;</label><input id="inama" class="form-control col-sm-8" type="text" name="nama"></div>
                                 <div class="col form-group row"><label class="col-sm-3 col-form-label">NIK</label><input id="inik" class="form-control col-sm-8" type="number" name="nik"></div>

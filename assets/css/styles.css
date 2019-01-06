@@ -50,5 +50,9 @@
 
 .modal-body {
   background-color:#9efbda;
+  height: 400px;
 }
 
+#modal form {
+  margin-bottom: 0px;
+}

@@ -5,6 +5,8 @@
         {
             parent::__construct();
             $this->load->model('Pasien_model');
+            $this->load->helper(array('form', 'url'));
+            $this->load->library('form_validation');
         }
 
         public function index()
@@ -22,8 +24,15 @@
             // if($this->Pasien_model->tambahpasien($_POST) > 0){
             //     redirect();
             // }
-            $this->Pasien_model->tambahpasien();
-            redirect('pasien');
+            // $this->form_validation->set_rules('noRm', 'hoam', 'required');
+            // if ($this->form_validation->run() == FALSE){
+            //     $this->load->view("template/header",$data);
+            //     $this->load->view("pasien/index",$data);
+            //     $this->load->view("template/footer");
+            // } else {
+                $this->Pasien_model->tambahpasien();
+                redirect('pasien');
+            //}
             //   var_dump($_POST);
         }
 
