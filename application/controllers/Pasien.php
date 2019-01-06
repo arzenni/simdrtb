@@ -19,8 +19,12 @@
 
         public function tambahpasien()
         {
-            $data['judul'] = 'Tambah Data Pasien';
-
+            // if($this->Pasien_model->tambahpasien($_POST) > 0){
+            //     redirect();
+            // }
+            //$this->Pasien_model->tambahpasien();
+            //redirect('pasien');
+               var_dump($_POST);
         }
 
         public function detilpasien()

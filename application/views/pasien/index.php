@@ -1,6 +1,10 @@
 
-<?php echo var_dump($pasien); ?>
+
     <h1>Pasien <?php echo $judul; ?></h1>
+
+    <button type="button" class="btn btn-primary modaltambah" data-toggle="modal" href="<?php echo base_url(); ?> pasien/tambahpasien" data-target="#modal-1">
+                        Tambah Pasien
+                        </button>
 
     <table class="table table-striped">
         <thead>
@@ -40,7 +44,7 @@
                         Detil
                         </button>
                 </td>
-                <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#edit">
+                <td><button type="button" class="btn btn-primary modaledit" data-toggle="modal" data-id="<?= $psn['noRm']; ?>" data-target="#modal-1">
                 edit
                 </button></td>
             </tr>
@@ -54,35 +58,47 @@
          <div class="modal fade overflow-init" role="dialog" tabindex="-1" id="modal-1">
             <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content overflow-init">
+                    <form action="" method="POST">
                     <div class="modal-header" style="background-color:#83eded;">
                         <h4 class="modal-title">Data Pasien</h4><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button></div>
-                       <div class="modal-body overflow-body">
-                            <form>
-                                <div class="col form-group row"><label class="col-sm-3 col-form-label">No. Rekam Medis&nbsp;</label><input class="form-control col-sm-8" type="text"></div>
-                                <div class="col form-group row"><label class="col-sm-3 col-form-label">Nama&nbsp;</label><input class="form-control col-sm-8" type="text"></div>
-                                <div class="col form-group row"><label class="col-sm-3 col-form-label">NIK</label><input class="form-control col-sm-8" type="numeric" inputmode="numeric"></div>
-                                <div class="col row"><label class="col-form-label col-sm-3 pt-0">Jenis Kelamin</label>
-                                    <div class="col-sm-8">
-                                        <div class="custom-control custom-radio"><input type="radio" class="custom-control-input" name="radio-stacked"><label class="custom-control-label">Perempuan</label></div>
-                                        <div class="custom-control custom-radio"><input type="radio" class="custom-control-input"><label class="custom-control-label">Laki-Laki</label></div>
+                        <div class="modal-body overflow-body">
+                                <div class="col form-group row"><label class="col-sm-3 col-form-label">No. Rekam Medis&nbsp;</label><input id="inoRm" class="form-control col-sm-8" type="number" name="noRm"></div>
+                                <div class="col form-group row"><label class="col-sm-3 col-form-label">Nama&nbsp;</label><input id="inama" class="form-control col-sm-8" type="text" name="nama"></div>
+                                <div class="col form-group row"><label class="col-sm-3 col-form-label">NIK</label><input id="inik" class="form-control col-sm-8" type="number" name="nik"></div>
+                                <div class="col row"><label class="col-form-label col-sm-3 pt-0" for="ijnsK">Jenis Kelamin</label>
+                                    <div class="col-sm-8 form-group">
+                                        <select class="form-control col-sm-8" id="ijnsK" name="jnsK">
+                                            <optgroup>
+                                            <option value="Laki-Laki" selected>Laki-Laki</option>
+                                            <option value="Perempuan">Perempuan</option>
+                                            </optgroup>
+                                        </select>
                                     </div>
                                 </div>
-                                <div class="col form-group row"><label class="col-sm-3 col-form-label">Tanggal Lahir</label><input class="form-control col-sm-8" type="text"></div>
-                                <div class="col form-group row"><label class="col-sm-3 col-form-label">Nama Ibu</label><input class="form-control col-sm-8" type="text"></div>
+                                <div class="col form-group row"><label class="col-sm-3 col-form-label">Tanggal Lahir</label><input id="itglahir" class="form-control col-sm-8" type="date" name="tglahir"></div>
+                                <div class="col form-group row"><label class="col-sm-3 col-form-label">Nama Ibu</label><input id="iibu" class="form-control col-sm-8" type="text" name="ibu"></div>
                                 <div class="col form-group row"><label class="col-form-label col-sm-3">Alamat</label></div>
-                                <div class="col form-group row"><label class="col-form-label col-sm-3">Dusun</label><input class="form-control col-sm-8" type="text"></div>
-                                <div class="col form-group row"><label class="col-form-label col-sm-3">Kelurahan</label><input class="form-control rm" type="text"></div>
-                                <div class="col form-group row"><label class="col-form-label col-sm-1">RT</label><input class="form-control col-sm-2" type="number" inputmode="numeric"><label class="col-form-label col-sm-1 kanan">RW</label><input class="form-control col-sm-2" type="numeric"
-                                        inputmode="numeric"></div>
-                                <div class="col form-group row"><label class="col-form-label col-sm-3">Kecamatan</label><input class="form-control col-sm-8" type="text"></div>
-                            </form>
+                                <div class="col form-group row"><label class="col-form-label col-sm-3">Dusun</label><input id="idsn" class="form-control col-sm-8" type="text" name="dsn"></div>
+                                <div class="col form-group row"><label class="col-form-label col-sm-3">Kelurahan</label><input id="ikelurahan" class="form-control col-sm-8" type="text" name="kelurahan"></div>
+                                <div class="col form-group row">
+                                <label class="col-form-label col-sm-1">RT</label>
+                                <input id="irt" class="form-control col-sm-2" type="number" inputmode="numeric" name="rt">
+                                <label class="col-form-label col-sm-1 kanan">RW</label>
+                                <input id="irw" class="form-control col-sm-2" type="number"                           inputmode="numeric" name="rw">
+                                </div>
+                                <div class="col form-group row"><label class="col-form-label col-sm-3">Kecamatan</label><input id="ikecamatan" class="form-control col-sm-8" type="text" name="kecamatan"></div>
+                                <div class="col form-group row"><label class="col-form-label col-sm-3">Kota</label><input id="ikota" class="form-control col-sm-8" type="text" name="kota"></div>    
                         </div>
-                    <div class="modal-footer" style="background-color:#83eded;"><button class="btn btn-light" type="button" data-dismiss="modal">Close</button><button class="btn btn-primary" type="button" style="background-color:rgb(247,247,247);">Save</button></div>
+                    <div class="modal-footer" style="background-color:#83eded;">
+                    <button class="btn btn-light" type="button" data-dismiss="modal">Close</button>
+                    <button class="btn btn-primary" type="submit" style="background-color:rgb(247,247,247);">Save</button>
+                    </div>
+                            </form>
                  </div>
             </div>
         </div>
     </div>
-
+    
     <!-- Modal Detil-->
     <div class="modal fade" role="dialog" tabindex="-1" id="modaldetil">
         <div class="modal-dialog" role="document">
@@ -93,22 +109,23 @@
                     <div class="card">
                         <div class="card-body">
                             <h4 class="card-title" id="nama">Nama</h4>
-                            <h6 class="text-muted card-subtitle mb-2">No. Rekam Medis&nbsp;<label id="noRm">Label</label>&nbsp;</h6>
+                            <h6 class="text-muted card-subtitle mb-2">No. Rekam Medis_<span id="noRm">Label</span></h6>
                             <div><label class="col-sm-4">NIK</label><label id="nik">Label</label></div>
-                            <div><label class="col-sm-4">Jenis Kelamin</label><label id="jnsk">Label</label></div>
+                            <div><label class="col-sm-4">Jenis Kelamin</label><label id="jnsK">Label</label></div>
                             <div><label class="col-sm-4">Tanggal Lahir</label><label id="tglahir">Label</label></div>
                             <div><label class="col-sm-4">Nama Ibu</label><label id="ibu">Label</label></div>
                             <div><label class="col-sm-4">Dusun</label><label id="dusun">Label</label></div>
                             <div><label class="col-sm-4">Kelurahan</label><label id="kelurahan">Label</label></div>
                             <div><label class="col-sm-3">RT/RW</label><label id="rt">Label</label><span>/</span><label id="rw">Label</label></div>
                             <div><label class="col-sm-4">Kecamatan</label><label id="kecamatan">Label</label></div>
-                            <div><label class="col-sm-4">Kabupaten</label><label id="kabupaten">Label</label></div>
+                            <div><label class="col-sm-4">Kota</label><label id="kota">Label</label></div>
                         </div>
                     </div>
                 </div>
-                <div class="modal-footer"><button class="btn btn-light" type="button" data-dismiss="modal">Close</button><button class="btn btn-primary" type="button">Save</button></div>
+                <div class="modal-footer"><button class="btn btn-light" type="button" data-dismiss="modal">Close</button><button class="btn btn-primary" type="submit">Save</button></div>
             </div>
         </div>
     </div>
-
     </div>
+
+    

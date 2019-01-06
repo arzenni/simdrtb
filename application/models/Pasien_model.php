@@ -20,5 +20,22 @@
             // $this->db->join('comments', 'comments.id = blogs.id');
             // return 
         }
+
+        public function tambahpasien(){
+            $data=[
+                "noRm" => $this->input->post('noRm'),
+                "nik" => $this->input->post('nik'),
+                "nama" => $this->input->post('nama'),
+                "tglahir" => $this->input->post('tglahir'),
+                "jnsK" => $this->input->post('jnsK'),
+                "ibu" => $this->input->post('ibu'),
+            ];
+            
+            $this->db->insert('pasien', $data);
+
+            
+
+        }
+
     }
 

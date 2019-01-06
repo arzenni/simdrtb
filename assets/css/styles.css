@@ -31,9 +31,10 @@
   overflow-y:auto;
 }
 
-#modal input {
+#modal input, #modal select{
   background-color:#cbf0ff;
 }
+
 
 #modal label, #modal button {
   font-size:20px;
