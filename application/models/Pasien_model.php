@@ -33,7 +33,41 @@
             
             $this->db->insert('pasien', $data);
 
-            
+            $data=[
+                "noRm" => $this->input->post('noRm'),
+                "dsn" => $this->input->post('dsn'),
+                "rt" => $this->input->post('rt'),
+                "rw" => $this->input->post('rw'),
+                "kelurahan" => $this->input->post('kelurahan'),
+                "kecamatan" => $this->input->post('kecamatan'),
+                "kota" => $this->input->post('kota'),
+            ];
+
+            $this->db->insert('alamat', $data);
+
+        }
+
+        public function ubahpasien(){
+            $data=[
+                "nik" => $this->input->post('nik'),
+                "nama" => $this->input->post('nama'),
+                "tglahir" => $this->input->post('tglahir'),
+                "jnsK" => $this->input->post('jnsK'),
+                "ibu" => $this->input->post('ibu'),
+            ];
+            $this->db->where('noRm', $this->input->post('noRm'));
+            $this->db->update('pasien', $data);
+
+            $data=[
+                "dsn" => $this->input->post('dsn'),
+                "rt" => $this->input->post('rt'),
+                "rw" => $this->input->post('rw'),
+                "kelurahan" => $this->input->post('kelurahan'),
+                "kecamatan" => $this->input->post('kecamatan'),
+                "kota" => $this->input->post('kota'),
+            ];
+            $this->db->where('noRm', $this->input->post('noRm'));
+            $this->db->update('alamat', $data);
 
         }
 

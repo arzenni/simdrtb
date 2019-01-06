@@ -4,12 +4,29 @@ $(function(){
         $('.modal-title').html('Tambah Pasien');
         $('#modal form').attr('action', "pasien/tambahpasien");
         $('.modal-footer button[type=submit]').html('tAMBAH');
-    })
+
+                 $('#inama').val(null);
+                 $('#inoRm').val(null);
+                 $('#inik').val(null);
+                 $('#ijnsK').val(null);
+                 $('#itglahir').val(null);
+                 $('#iibu').val(null);
+                 $('#idsn').val(null);
+                $('#irt').val(null);
+                $('#irw').val(null);
+                $('#ikecamatan').val(null);
+                $('#ikelurahan').val(null);
+                $('#ikota').val(null);    
+
+        });
+
+    
 
     $('.modaledit').on('click', function(){
         //$('#modal form').attr();
         // console.log('oukay');
-        $('.modal-title').html('Edit Pasien');
+        $('.modal-title').html('Ubah Data Pasien');
+        $('#modal form').attr('action', "pasien/ubahpasien");
         $('.modal-footer button[type=submit]').html('Simpan');
     
         const id = $(this).data('id');

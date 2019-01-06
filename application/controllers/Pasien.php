@@ -22,9 +22,9 @@
             // if($this->Pasien_model->tambahpasien($_POST) > 0){
             //     redirect();
             // }
-            //$this->Pasien_model->tambahpasien();
-            //redirect('pasien');
-               var_dump($_POST);
+            $this->Pasien_model->tambahpasien();
+            redirect('pasien');
+            //   var_dump($_POST);
         }
 
         public function detilpasien()
@@ -35,6 +35,12 @@
             echo json_encode($this->Pasien_model->getbyId($_POST['id']));
             //$data['']
             //$data['pasien'] = $this->Pasien_model->getbyIdpasien($id);
+        }
+
+        public function ubahpasien()
+        {
+            $this->Pasien_model->ubahpasien();
+            redirect('pasien');
         }
 
     }
