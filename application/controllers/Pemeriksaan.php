@@ -18,6 +18,17 @@
             $this->load->view('template/footer');
         }
 
+        public function tambahpemeriksaan()
+        {
+            if( $this->input->post('idreg') !== null && $this )
+            {
+                $this->Pemeriksaan_model->tambahtcm();
+            }
+            if
+            $this->Pemeriksaan_model->tambahdiagnosa();
+
+        }
+
         // public function tcm()
         // {
         //     $data[];

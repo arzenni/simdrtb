@@ -8,10 +8,13 @@
            return $query->result_array();
        }
 
-       public function tambahpemeriksaan(){
-           if ($pemeriksaa["idreg"] = null){
-               insert into 
-           }
+       public function tambahdiagnosa(){
 
        }
+
+       public function tambahtcm(){
+
+       }
+
+       
     }
