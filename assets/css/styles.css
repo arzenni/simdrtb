@@ -56,3 +56,14 @@
 #modal form {
   margin-bottom: 0px;
 }
+
+body{
+  background-color:whitesmoke;
+}
+
+.container {
+  height: 100%;
+  width: 80%;
+  background-color: wheat;
+  padding-top: 12px;
+}

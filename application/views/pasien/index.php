@@ -1,67 +1,60 @@
 
+<div class="container">
 
     <h1>Pasien <?php echo $judul; ?></h1>
-    <div class="btn-group">
-  <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    Action
-  </button>
-  <div class="dropdown-menu">
-    <a class="dropdown-item" href="#">Action</a>
-    <a class="dropdown-item" href="#">Another action</a>
-    <a class="dropdown-item" href="#">Something else here</a>
-    <div class="dropdown-divider"></div>
-    <a class="dropdown-item" href="#">Separated link</a>
-  </div>
-</div>
     <button type="button" class="btn btn-primary modaltambah" data-toggle="modal" href="<?php echo base_url(); ?> pasien/tambahpasien" data-target="#modal-1">
                         Tambah Pasien
                         </button>
+    <div class= "table-responsive">
 
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th>NIK</th>
-                <th>No. Rekam Medis</th>
-                <th>Nama</th>
-                <th>Jenis Kelamin</th>
-                <th>Ibu Kandung</th>
-                <th>Kecamatan</th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php foreach($pasien as $psn) :?>
-            <tr>
-                <td>
-                    <?php echo $psn['nik'];?>
-                </td>
-                <td>
-                    <?php echo $psn['noRm'];?>
-                </td>
-                <td>
-                    <?= $psn['nama'];?>
-                </td>
-                <td>
-                    <?= $psn['jnsK'];?>
-                </td>
-                <td>
-                    <?= $psn['ibu'];?>
-                </td>
-                <td> 
-                    <?= $psn['kecamatan'];?>
-                </td>
-                <td> 
-                        <button type="button" class="btn btn-primary modaltampil" data-toggle="modal" href="<?php echo base_url(); ?> pasien" data-id="<?= $psn['noRm']; ?>" data-target="#modaldetil">
-                        Detil
-                        </button>
-                </td>
-                <td><button type="button" class="btn btn-primary modaledit" data-toggle="modal" data-id="<?= $psn['noRm']; ?>" data-target="#modal-1">
-                edit
-                </button></td>
-            </tr>
-            <?php endforeach; ?>
-        </tbody>
-    </table>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>NIK</th>
+                    <th>No. Rekam Medis</th>
+                    <th>Nama</th>
+                    <th>Jenis Kelamin</th>
+                    <th>Ibu Kandung</th>
+                    <th>Kecamatan</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach($pasien as $psn) :?>
+                <tr>
+                    <td>
+                        <?php echo $psn['nik'];?>
+                    </td>
+                    <td>
+                        <?php echo $psn['noRm'];?>
+                    </td>
+                    <td>
+                        <?= $psn['nama'];?>
+                    </td>
+                    <td>
+                        <?= $psn['jnsK'];?>
+                    </td>
+                    <td>
+                        <?= $psn['ibu'];?>
+                    </td>
+                    <td> 
+                        <?= $psn['kecamatan'];?>
+                    </td>
+                    <td> 
+                            <button type="button" class="btn btn-primary modaltampil" data-toggle="modal" href="<?php echo base_url(); ?> pasien" data-id="<?= $psn['noRm']; ?>" data-target="#modaldetil">
+                            Detil
+                            </button>
+                    </td>
+                    <td><button type="button" class="btn btn-primary modaledit" data-toggle="modal" data-id="<?= $psn['noRm']; ?>" data-target="#modal-1">
+                    edit
+                    </button></td>
+                </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
+
+    </div>
+
 
     <table class="table table-striped">
         <thead>
@@ -185,4 +178,5 @@
     </div>
     </div>
 
+</div>
     
