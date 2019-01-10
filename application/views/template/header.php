@@ -37,7 +37,7 @@
             Pengobatan
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-            <a class="dropdown-item" href="#">Diagnosa</a>
+            <a class="dropdown-item" href="<?= base_url()?>pemeriksaan">Diagnosa</a>
             <a class="dropdown-item" href="#">Pencatatan Khusus</a>
             <a class="dropdown-item" href="#">Something else here</a>
           </div>

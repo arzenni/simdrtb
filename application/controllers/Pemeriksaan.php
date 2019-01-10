@@ -20,12 +20,27 @@
 
         public function tambahpemeriksaan()
         {
-            if( $this->input->post('idreg') !== null && $this )
+            //echo var_dump($_POST);
+            if($this->Pemeriksaan_model->cekRm($_POST['noRm']) !== null)
             {
-                $this->Pemeriksaan_model->tambahtcm();
+                    if( $this->input->post('idreg') !== null)
+                    {
+                        $this->Pemeriksaan_model->tambahtcm();
+                    }
+                    if( $this->input->post('idMk') !== null)
+                    {
+                        $this->Pemeriksaan_model->mikroskopis();
+                    }
+                    if( $this->input->post('noRm') !== null)
+                    {
+                        $this->Pemeriksaan_model->tambahpemeriksaan();
+                    }
+                   
+            else {
+                echo "Nomor Rekam Medis Belum Ada";
             }
-            if
-            $this->Pemeriksaan_model->tambahdiagnosa();
+
+            }
 
         }
 

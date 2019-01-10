@@ -1,5 +1,6 @@
 $(function(){        
 
+    //halaman Pasien
     $('.modaltambah').on('click', function(){
         $('.modal-title').html('Tambah Pasien');
         $('#modal form').attr('action', "pasien/tambahpasien");
@@ -17,8 +18,7 @@ $(function(){
                 $('#ikecamatan').val(null);
                 $('#ikelurahan').val(null);
                 $('#ikota').val(null);    
-
-        });
+    });
 
     
 
@@ -51,15 +51,14 @@ $(function(){
                 $('#irw').val(data.rw);
                 $('#ikecamatan').val(data.kecamatan);
                 $('#ikelurahan').val(data.kelurahan);
-                $('#ikota').val(data.kota);
-                
+                $('#ikota').val(data.kota);    
             }
 
         });
 
     })
 
-    $('.modaltampil, #modal table tr td').on('click', function(){
+    $('.modaltampil').on('click', function(){
 
         // console.log('oukay');
         $('.modal-title').html('Detil Pasien');
@@ -93,5 +92,25 @@ $(function(){
         });
 
     })
+    //end Halaman Pasien
 
+    //Halaman Pemeriksaan
+    $('.modaltambahperiksa').on('click', function(){
+        $('.modal-title').html('Tambah Hasil Pemeriksaan');
+        $('#modal form').attr('action', "pemeriksaan/tambahpemeriksaan");
+        $('.modal-footer button[type=submit]').html('Tambah');
+
+                 $('#inama').val(null);
+                 $('#inoRm').val(null);
+                 $('#inik').val(null);
+                 $('#ijnsK').val(null);
+                 $('#itglahir').val(null);
+                 $('#iibu').val(null);
+                 $('#idsn').val(null);
+                $('#irt').val(null);
+                $('#irw').val(null);
+                $('#ikecamatan').val(null);
+                $('#ikelurahan').val(null);
+                $('#ikota').val(null);    
+    });
 });
