@@ -8,29 +8,42 @@
            return $query->result_array();
       }
 
-      public function tambahpemeriksaan(){
+      public function tambahpemeriksaan($idPeriksa){
          $data=[
-            "idPeriksa" => $this->input->post('idPeriksa'),
-            "idMk" => $this->input->post('idMk'),
-            "idreg" => $this->input->post('idreg'),
+            "idPeriksa" => $idPeriksa,
             "noRm" => $this->input->post('noRm'),
-            "tgl" => $this->input->post('tgl'),
-            "tglront" => $this->input->post('tglront'),
+            "blnpengobatan" => $this->input->post('blnpengobatan'),
+            "idreg" => $this->input->post('genxpert'),
+            "kettambahan" => $this->input->post('kettambahan'),
+            "tglmulai" => $this->input->post('tglmulai'),
+            "klasifikasi" => $this->input->post('klasifikasi'),
+            "thoraks" => $this->input->post('thoraks'),
+            "noat" => $this->input->post('noat'),
+            "panduanoat" => $this->input->post('panduanoat'),
+            "riwayat" => $this->input->post('riwayat'),
          ];
          $this->db->insert('pemeriksaan', $data);
 
-         $data=[
-         "idPeriksa" => $this->input->post('idPeriksa'),
-         "hasil" => $this->input->post('diagnosa'),
-         ];
-         $this->db->insert('diagnosa', $data);
+         // $data=[
+         // "idPeriksa" => $this->input->post('idPeriksa'),
+         // "hasil" => $this->input->post('diagnosa'),
+         // ];
+         // $this->db->insert('diagnosa', $data);
       }
 
       public function tambahtcm(){
          $data=[
-            "idreg" => $this->input->post('idreg'),
-            "waktu" => $this->input->post('tgltcm'),
-            "hasil" => $this->input->post('hasiltcm'),
+            "idreg" => $this->input->post('genxpert'),
+            "bahanperiksa" => $this->input->post('bhperiksa'),
+            "hasildetect" => $this->input->post('detect'),
+            "hasilresist" => $this->input->post('resis'),
+            "kethasil" => $this->input->post('kethasiltcm'),
+            "ketklinik" => $this->input->post('ketklinik'),
+            "kettambahan" => $this->input->post('kettambahantcm'),
+            "rawat" => $this->input->post('rawat'),
+            "ruang" => $this->input->post('ruang'),
+            "tglperiksa" => $this->input->post('tcmtgl'),
+            "wktperiksa" => $this->input->post('tcmwkt'),
          ];
          $this->db->insert('tcm', $data);
       }
@@ -47,6 +60,11 @@
       public function cekRm($noRm){
          return $this->db->query("SELECT noRm from pasien WHERE noRm = ". $noRm)->row_array();
       }
+
+      public function getIdperiksa(){
+         return $this->db->query("SELECT idPeriksa FROM pemeriksaan GROUP by idPeriksa DESC LIMIT 1")->row();
+         
+     }
    }
 
    

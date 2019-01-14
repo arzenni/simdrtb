@@ -21,13 +21,15 @@
             // return 
         }
 
+        
+
         public function tambahpasien(){
             $data=[
                 "noRm" => $this->input->post('noRm'),
                 "nik" => $this->input->post('nik'),
                 "nama" => $this->input->post('nama'),
                 "tglahir" => $this->input->post('tglahir'),
-                "tglregistrasi" => $this->input->post('tglregis'),
+                "tglregistrasi" => $this->input->post('tgregis'),
                 "jnsK" => $this->input->post('jnsK'),
                 "ibu" => $this->input->post('ibu'),
             ];
