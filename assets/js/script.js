@@ -4,7 +4,7 @@ $(function(){
     $('.modaltambah').on('click', function(){
         $('.modal-title').html('Tambah Pasien');
         $('#modal form').attr('action', "pasien/tambahpasien");
-        $('.modal-footer button[type=submit]').html('tAMBAH');
+        $('.modal-footer button[type=submit]').html('Tambah');
 
                  $('#inama').val(null);
                  $('#inoRm').val(null);

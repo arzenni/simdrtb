@@ -27,6 +27,7 @@
                 "nik" => $this->input->post('nik'),
                 "nama" => $this->input->post('nama'),
                 "tglahir" => $this->input->post('tglahir'),
+                "tglregistrasi" => $this->input->post('tglregis'),
                 "jnsK" => $this->input->post('jnsK'),
                 "ibu" => $this->input->post('ibu'),
             ];
@@ -52,6 +53,7 @@
                 "nik" => $this->input->post('nik'),
                 "nama" => $this->input->post('nama'),
                 "tglahir" => $this->input->post('tglahir'),
+                "tglregistrasi" => $this->input->post('tglregis'),
                 "jnsK" => $this->input->post('jnsK'),
                 "ibu" => $this->input->post('ibu'),
             ];

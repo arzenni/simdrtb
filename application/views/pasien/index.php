@@ -81,6 +81,7 @@
                                 </div>
                                 <div class="col form-group row"><label class="col-sm-3 col-form-label">Tanggal Lahir</label><input id="itglahir" class="form-control col-sm-8" type="date" name="tglahir"></div>
                                 <div class="col form-group row"><label class="col-sm-3 col-form-label">Nama Ibu</label><input id="iibu" class="form-control col-sm-8" type="text" name="ibu"></div>
+                                <div class="col form-group row"><label class="col-sm-3 col-form-label">Tanggal Registrasi</label><input id="itgregis" class="form-control col-sm-8" type="date" name="tgregis"></div>
                                 <div class="col form-group row"><label class="col-form-label col-sm-3">Alamat</label></div>
                                 <div class="col form-group row"><label class="col-form-label col-sm-3">Dusun</label><input id="idsn" class="form-control col-sm-8" type="text" name="dsn"></div>
                                 <div class="col form-group row"><label class="col-form-label col-sm-3">Kelurahan</label><input id="ikelurahan" class="form-control col-sm-8" type="text" name="kelurahan"></div>

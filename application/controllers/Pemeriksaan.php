@@ -34,6 +34,7 @@
                     if( $this->input->post('noRm') !== null)
                     {
                         $this->Pemeriksaan_model->tambahpemeriksaan();
+                        redirect('pemeriksaan');
                     }
                    
             else {
