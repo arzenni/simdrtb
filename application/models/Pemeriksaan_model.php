@@ -8,9 +8,16 @@
            return $query->result_array();
       }
 
-      public function tambahpemeriksaan($idPeriksa){
+
+      
+      //============================================================================================
+      //TAMBAH DATA PEMERIKSAAN
+      public function tambahpemeriksaan($newid = null){
+
+         // $id = $this->db->query("SELECT idPeriksa FROM pemeriksaan GROUP by idPeriksa DESC LIMIT 1")->row();
+         // $idPeriksa = $id + 1;
          $data=[
-            "idPeriksa" => $idPeriksa,
+            //"idPeriksa" => $newid,
             "noRm" => $this->input->post('noRm'),
             "blnpengobatan" => $this->input->post('blnpengobatan'),
             "idreg" => $this->input->post('genxpert'),
@@ -31,6 +38,7 @@
          // $this->db->insert('diagnosa', $data);
       }
 
+      //TAMBAH DATA TCM
       public function tambahtcm(){
          $data=[
             "idreg" => $this->input->post('genxpert'),
@@ -48,6 +56,7 @@
          $this->db->insert('tcm', $data);
       }
 
+      //TAMBAH DATA MIKROSKOPIS
       public function mikroskopis(){
          $data=[
             "idMk" => $this->input->post('idMk'),
@@ -57,6 +66,74 @@
          $this->db->insert('mikroskopis', $data);
       }
 
+      //TAMBAH LANJUTOAT
+      public function lanjutoat($id=null)
+      {
+         $data = [
+            "idPeriksa" => $id,
+            "lanjutoat" => $this->input->post('lanjutoat'),
+            "ntempat" => $this->input->post('ntempatoat'),
+            ]
+      }
+
+      //TAMBAH HASIL PENGOBATAN
+      public function hasilpengobatan($id=null)
+      {
+         $data = [
+            "idPeriksa" => $id,
+            "hasil" => $this->input->post('hasilpengobatan'),
+            "tglhenti" => $this->input->post('tglhenti'),
+            ]
+      }
+
+      //TAMBAH STOK OAT
+      public function stokoat($id=null)
+      {
+         $data = [
+            "idPeriksa" => $id,
+            "ntempat" => $this->input->post('ntempatoat'),
+            "stokoat" => $this->input->post('stokoat'),
+            ]
+      }
+
+      //TAMBAH TERAPI
+      public function terapi($id=null)
+      {
+         $data = [
+            "idPeriksa" => $id,
+            "dm" => $this->input->post('dm'),
+            "pengobatandm" => $this->input->post('pengobatandm'),
+            "terapi" => $this->input->post('art'),
+            ]
+      }
+
+      //TAMBAH TES CEPAT
+      public function tescepat($id=null)
+      {
+         $data = [
+            "idPeriksa" => $id,
+            "kultur" => $this->input->post('kultur'),
+            "nkultur" => $this->input->post('nkultur'),
+            "ntcepat" => $this->input->post('ntcepat'),
+            
+            "tanggal" => $this->input->post('tgltcepat'),
+            
+            "tempat" => $this->input->post('tcepat'),
+            ]
+      }
+
+      //TAMBAH TES VCT
+      public function tescepat($id=null)
+      {
+         $data = [
+            "idPeriksa" => $id,
+            "hasil" => $this->input->post('hasilvct'),
+            "tanggal" => $this->input->post('tglvct'),
+            "tempat" => $this->input->post('tempatvct'),
+            ]
+      }
+
+      //============================================================================================
       public function cekRm($noRm){
          return $this->db->query("SELECT noRm from pasien WHERE noRm = ". $noRm)->row_array();
       }

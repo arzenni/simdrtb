@@ -20,12 +20,22 @@
 
         public function tambahpemeriksaan()
         {
-            $data ['idPeriksa'] = $this->Pemeriksaan_model->getIdperiksa();
-            $newId = $data['idPeriksa'] + 1;
+             $id = $this->Pemeriksaan_model->getIdperiksa();
+             $newId = $id->idPeriksa +1;
+             echo 'id==';
+            echo var_dump($id);
+            echo '</br>';
+            echo 'newid==';
             echo var_dump($newId);
+            echo '</br>';
             echo var_dump($_POST);
-                        $this->Pemeriksaan_model->tambahtcm();
-            $this->Pemeriksaan_model->tambahpemeriksaan($newId);
+            if ($this->input->post('idreg') !== null){
+                $this->Pemeriksaan_model->tambahtcm();
+                $this->Pemeriksaan_model->tambahpemeriksaan($newId);
+            }else{
+                $this->Pemeriksaan_model->tambahpemeriksaan();
+
+            }
             // if($this->Pemeriksaan_model->cekRm($_POST['noRm']) !== null)
             // {
             //         if( $this->input->post('idreg') !== null)

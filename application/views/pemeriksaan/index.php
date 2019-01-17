@@ -50,7 +50,7 @@
                 <div class="border border-primary rounded-bottom border-top-0">
                     <div class="col form-group row"><label class="col-form-label col-sm-4">Tempat</label><select class="form-control col-sm-4" id="fstokoat" name="stokoat"><option value="" selected="">-</option><option value="RS">RS</option><option value="PKM">PKM</option></select>
                         <input
-                            class="form-control col-sm-4" type="text" id="fntempatoat" name="fntempatoat"></div>
+                            class="form-control col-sm-4" type="text" id="fntempatoat" name="ntempatoat"></div>
                 </div>
             </div>
             <div style="padding:3px 8px;">
@@ -70,11 +70,11 @@
                 <div class="border border-primary rounded-bottom border-top-0">
                     <div class="col form-group row"><label class="col-form-label col-sm-4">Tempat</label><select class="form-control col-sm-4" id="ftcepat" name="tcepat"><option value="" selected="">-</option><option value="RS">RS</option><option value="PKM">PKM</option></optgroup></select>
                         <input
-                            class="form-control col-sm-4" type="text" id="fntcepat" name="fntcepat"></div>
+                            class="form-control col-sm-4" type="text" id="fntcepat" name="ntcepat"></div>
                     <div class="col form-group row"><label class="col-form-label col-sm-4">Kultur</label><select class="form-control col-sm-4" id="fkultur" name="kultur"><option value="" selected="">-</option><option value="Kultur 1">Kultur 1</option><option value="Kultur 2">Kultur 2</option></optgroup></select>
                         <input
                             class="form-control col-sm-4" type="text" id="fnkultur" name="nkultur"></div>
-                    <div class="col form-group row"><label class="col-form-label col-sm-4">Tanggal</label><input class="form-control col-sm-8" type="date" id="ftgltcepat" name="ftgltcepat"></div>
+                    <div class="col form-group row"><label class="col-form-label col-sm-4">Tanggal</label><input class="form-control col-sm-8" type="date" id="ftgltcepat" name="tgltcepat"></div>
                 </div>
             </div>
     </div>
