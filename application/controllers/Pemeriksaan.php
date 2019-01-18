@@ -18,49 +18,60 @@
             $this->load->view('template/footer');
         }
 
-        public function tambahpemeriksaan()
-        {
-             $id = $this->Pemeriksaan_model->getIdperiksa();
-             $newId = $id->idPeriksa +1;
-             echo 'id==';
+        public function lengkap(){
+            $this->Pemeriksaan_model->tambahpemeriksaan();
+            $id = $this->Pemeriksaan_model->getIdperiksa();
+            // if($id == null)
+            // { 
+            //     echo 'idmasuksini';
+            //     $id=0;
+            //     $newId = $id+1;
+            // }else
+            // {
+            //     echo 'idturunsini';
+            //     $newId = $id->idPeriksa + 1;
+            // }
+            $newId = $id->idPeriksa;
+            echo 'id==';
             echo var_dump($id);
             echo '</br>';
             echo 'newid==';
             echo var_dump($newId);
             echo '</br>';
-            echo var_dump($_POST);
-            if ($this->input->post('idreg') !== null){
-                $this->Pemeriksaan_model->tambahtcm();
-                $this->Pemeriksaan_model->tambahpemeriksaan($newId);
-            }else{
-                $this->Pemeriksaan_model->tambahpemeriksaan();
-
-            }
-            // if($this->Pemeriksaan_model->cekRm($_POST['noRm']) !== null)
-            // {
-            //         if( $this->input->post('idreg') !== null)
-            //         {
-            //         }
-            //         if( $this->input->post('idMk') !== null)
-            //         {
-            //             $this->Pemeriksaan_model->mikroskopis();
-            //         }
-            //         if( $this->input->post('noRm') !== null)
-            //         {
-            //             $this->Pemeriksaan_model->tambahpemeriksaan();
-            //             redirect('pemeriksaan');
-            //         }
-                   
-            // else {
-            //     echo "Nomor Rekam Medis Belum Ada";
-            // }
-
-            // }
-
+            $this->Pemeriksaan_model->mikroskopis($newId);
+            $this->Pemeriksaan_model->lanjutoat($newId);
+            $this->Pemeriksaan_model->hasilpengobatan($newId);
+            $this->Pemeriksaan_model->stokoat($newId);
+            $this->Pemeriksaan_model->terapi($newId);
+            $this->Pemeriksaan_model->tescepat($newId);
+            $this->Pemeriksaan_model->vct($newId);
         }
 
-        // public function tcm()
-        // {
-        //     $data[];
-        // }
+        public function tambahpemeriksaan()
+        {
+             
+            echo var_dump($_POST);
+            $tcm = $this->Pemeriksaan_model->cektcm();
+            echo '<br>dumptcm';
+            var_dump ($tcm);
+            if($tcm == null){
+                
+                $this->Pemeriksaan_model->tambahtcm();
+                echo 'tcm kosong';
+                $this->lengkap();
+                redirect('pemeriksaan');
+            }else{
+                if ($this->input->post('genxpert') != null){
+                    echo 'tcm masuk1';
+                    $this->Pemeriksaan_model->tambahtcm();
+                    $this->lengkap();
+                    redirect('pemeriksaan');
+                }else{
+                    echo 'else tcm tidak masuk';
+                    $this->lengkap();
+                    redirect('pemeriksaan');
+                }
+            }
+            // echo 'pemeriksaan masuk';
+        }
     }

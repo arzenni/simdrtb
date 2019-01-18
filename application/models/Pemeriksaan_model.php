@@ -12,7 +12,7 @@
       
       //============================================================================================
       //TAMBAH DATA PEMERIKSAAN
-      public function tambahpemeriksaan($newid = null){
+      public function tambahpemeriksaan(){
 
          // $id = $this->db->query("SELECT idPeriksa FROM pemeriksaan GROUP by idPeriksa DESC LIMIT 1")->row();
          // $idPeriksa = $id + 1;
@@ -57,33 +57,34 @@
       }
 
       //TAMBAH DATA MIKROSKOPIS
-      public function mikroskopis(){
+      public function mikroskopis($id = null){
          $data=[
-            "idMk" => $this->input->post('idMk'),
-            "hasil" => $this->input->post('hasilMk'),
-            "tglkeluar" => $this->input->post('tglMk'),
+            'idPeriksa' => $id,
+            "konversi" => $this->input->post('mikkonv'),
+            "nilaikonversi" => $this->input->post('nilaikonv'),
+            "tglkeluar" => $this->input->post('miktgl'),
          ];
          $this->db->insert('mikroskopis', $data);
       }
 
       //TAMBAH LANJUTOAT
-      public function lanjutoat($id=null)
-      {
+      public function lanjutoat($id=null){
          $data = [
             "idPeriksa" => $id,
             "lanjutoat" => $this->input->post('lanjutoat'),
             "ntempat" => $this->input->post('ntempatoat'),
-            ]
+         ];
+         $this->db->insert('lanjutoat', $data);
       }
 
       //TAMBAH HASIL PENGOBATAN
-      public function hasilpengobatan($id=null)
-      {
+      public function hasilpengobatan($id=null){
          $data = [
             "idPeriksa" => $id,
             "hasil" => $this->input->post('hasilpengobatan'),
             "tglhenti" => $this->input->post('tglhenti'),
-            ]
+         ];
+         $this->db->insert('hasilpengobatan', $data);
       }
 
       //TAMBAH STOK OAT
@@ -93,7 +94,8 @@
             "idPeriksa" => $id,
             "ntempat" => $this->input->post('ntempatoat'),
             "stokoat" => $this->input->post('stokoat'),
-            ]
+         ];
+         $this->db->insert('stokoat', $data);
       }
 
       //TAMBAH TERAPI
@@ -104,7 +106,8 @@
             "dm" => $this->input->post('dm'),
             "pengobatandm" => $this->input->post('pengobatandm'),
             "terapi" => $this->input->post('art'),
-            ]
+         ];
+         $this->db->insert('terapi', $data);
       }
 
       //TAMBAH TES CEPAT
@@ -119,18 +122,20 @@
             "tanggal" => $this->input->post('tgltcepat'),
             
             "tempat" => $this->input->post('tcepat'),
-            ]
+         ];
+         $this->db->insert('tescepat', $data);
       }
 
       //TAMBAH TES VCT
-      public function tescepat($id=null)
+      public function vct($id=null)
       {
          $data = [
             "idPeriksa" => $id,
             "hasil" => $this->input->post('hasilvct'),
             "tanggal" => $this->input->post('tglvct'),
             "tempat" => $this->input->post('tempatvct'),
-            ]
+         ];
+         $this->db->insert('vct', $data);
       }
 
       //============================================================================================
@@ -141,6 +146,10 @@
       public function getIdperiksa(){
          return $this->db->query("SELECT idPeriksa FROM pemeriksaan GROUP by idPeriksa DESC LIMIT 1")->row();
          
+     }
+
+     public function cektcm(){
+      return $this->db->query("SELECT idreg FROM tcm GROUP by idreg DESC LIMIT 1")->row();
      }
    }
 
