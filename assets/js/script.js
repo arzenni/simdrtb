@@ -113,4 +113,6 @@ $(function(){
                 $('#ikelurahan').val(null);
                 $('#ikota').val(null);    
     });
+
+    // $('.detilperiksa').on('click', "pemeriksaan/detil/");
 });

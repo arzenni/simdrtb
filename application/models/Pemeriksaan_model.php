@@ -2,11 +2,111 @@
 
     class Pemeriksaan_model extends CI_Controller{
       public function getAllpemeriksaan(){
-           $this->db->select("pemeriksaan.idperiksa, pasien.noRm noRm, pasien.nama nama, pasien.jnsK jnsK, mikroskopis.hasil hasil, mikroskopis.tglkeluar tglkeluar, tcm.idreg idreg, tcm.hasil tcmhasil, pemeriksaan.tglront tglront, pemeriksaan.tgl tgl, GROUP_CONCAT(diagnosa.hasil SEPARATOR ',') as hasil");
-           $query = $this->db->get_where('pasien, pemeriksaan, mikroskopis, tcm, diagnosa', 'pasien.noRm = pemeriksaan.noRm  AND mikroskopis.idMk = pemeriksaan.idMk AND tcm.idreg = pemeriksaan.idreg AND diagnosa.idPeriksa = pemeriksaan.idPeriksa');
-        // $query = $this->db->query("pemeriksaan.idperiksa IDP, pasien.noRm noRm, pasien.nama nama, pasien.jnsK jnsk, mikroskopis.hasil hasil, mikroskopis.tglkeluar tglkeluar, tcm.idreg idreg, tcm.hasil tcmhasil, pemeriksaan.tglront tglront, pemeriksaan.tgl tgl, GROUP_CONCAT(diagnosa.hasil SEPARATOR ',') as hasil from pasien, pemeriksaan, mikroskopis, tcm, diagnosa WHERE pasien.noRm = pemeriksaan.noRm  AND mikroskopis.idMk = pemeriksaan.idMk AND tcm.idreg = pemeriksaan.idreg AND diagnosa.idPeriksa = pemeriksaan.idPeriksa GROUP BY pemeriksaan.idPeriksa");
-           return $query->result_array();
+           return $this->db->query("SELECT pemeriksaan.idPeriksa,
+           pemeriksaan.noRm,
+           pemeriksaan.tglmulai,
+           pasien.nama,
+           tcm.idreg,
+           tcm.hasildetect,
+           tcm.hasilresist,
+           vct.hasil,
+           pemeriksaan.blnpengobatan,
+           pemeriksaan.klasifikasi,
+           pemeriksaan.thoraks,
+           mikroskopis.tglkeluar,
+           mikroskopis.nilaikonversi,
+           mikroskopis.konversi
+         FROM lanjutoat
+           INNER JOIN pemeriksaan
+             ON lanjutoat.idPeriksa = pemeriksaan.idPeriksa
+           INNER JOIN tcm
+             ON pemeriksaan.idreg = tcm.idreg
+           INNER JOIN mikroskopis
+             ON mikroskopis.idPeriksa = pemeriksaan.idPeriksa
+           INNER JOIN hasilpengobatan
+             ON hasilpengobatan.idPeriksa = pemeriksaan.idPeriksa
+           INNER JOIN stokoat
+             ON stokoat.idPeriksa = pemeriksaan.idPeriksa
+           INNER JOIN terapi
+             ON terapi.idPeriksa = pemeriksaan.idPeriksa
+           INNER JOIN tescepat
+             ON tescepat.idPeriksa = pemeriksaan.idPeriksa
+           INNER JOIN vct
+             ON vct.idPeriksa = pemeriksaan.idPeriksa
+           INNER JOIN pasien
+             ON pemeriksaan.noRm = pasien.noRm")->result_array();
       }
+
+      public function detil($id){
+         return $this->db->query("SELECT pemeriksaan.idperiksa
+         pemeriksaan.noRm,
+         pemeriksaan.tglmulai,
+         pasien.nama,
+         tcm.idreg,
+         tcm.hasildetect,
+         tcm.hasilresist,
+         tcm.kethasil,
+         tcm.ketklinik,
+         pemeriksaan.kettambahan,
+         vct.hasil,
+         pemeriksaan.blnpengobatan,
+         pemeriksaan.klasifikasi,
+         pemeriksaan.thoraks,
+         mikroskopis.tglkeluar,
+         mikroskopis.nilaikonversi,
+         mikroskopis.konversi,
+         tcm.bahanperiksa,
+         tcm.kettambahan,
+         tcm.rawat,
+         tcm.ruang,
+         tcm.tglperiksa,
+         tcm.wktperiksa,
+         pemeriksaan.idreg,
+         pemeriksaan.panduanoat,
+         pemeriksaan.noat,
+         pemeriksaan.riwayat,
+         vct.tempat,
+         vct.tanggal,
+         lanjutoat.lanjutoat,
+         lanjutoat.ntempat,
+         stokoat.stokoat,
+         stokoat.ntempat,
+         terapi.terapi,
+         terapi.dm,
+         terapi.pengobatandm,
+         tescepat.tempat,
+         tescepat.tanggal,
+         tescepat.ntcepat,
+         tescepat.kultur,
+         tescepat.nkultur,
+         pasien.noRm,
+         pasien.nik,
+         hasilpengobatan.hasil,
+         hasilpengobatan.tglhenti,
+         pemeriksaan.idPeriksa
+       FROM lanjutoat
+         INNER JOIN pemeriksaan
+           ON lanjutoat.idPeriksa = pemeriksaan.idPeriksa
+         INNER JOIN tcm
+           ON pemeriksaan.idreg = tcm.idreg
+         INNER JOIN mikroskopis
+           ON mikroskopis.idPeriksa = pemeriksaan.idPeriksa
+         INNER JOIN hasilpengobatan
+           ON hasilpengobatan.idPeriksa = pemeriksaan.idPeriksa
+         INNER JOIN stokoat
+           ON stokoat.idPeriksa = pemeriksaan.idPeriksa
+         INNER JOIN terapi
+           ON terapi.idPeriksa = pemeriksaan.idPeriksa
+         INNER JOIN tescepat
+           ON tescepat.idPeriksa = pemeriksaan.idPeriksa
+         INNER JOIN vct
+           ON vct.idPeriksa = pemeriksaan.idPeriksa
+         INNER JOIN pasien
+           ON pemeriksaan.noRm = pasien.noRm
+       GROUP BY pemeriksaan.tglmulai
+       HAVING pemeriksaan.idPeriksa = ". $id . "ORDER BY pemeriksaan.idPeriksa")->row_array();
+      }
+      
 
 
       

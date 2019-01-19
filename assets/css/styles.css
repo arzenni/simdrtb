@@ -27,9 +27,6 @@
   overflow-y:initial;
 }
 
-.overflow-body {
-  overflow-y:auto;
-}
 
 #modal input, #modal select{
   background-color:#cbf0ff;
@@ -62,9 +59,8 @@ body{
 }
 
 .container {
-  height: 100%;
   width: 80%;
   
-  padding-top: 73px;
+  padding-top: 150px;
 
 }

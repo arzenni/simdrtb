@@ -10,27 +10,18 @@
 
         public function index()
         {
-            $data['judul'] ='Data Pasien';
-            //$data['pasien'] = $this->Pemeriksaan_model->getAllpemeriksaan();
+            // $data['judul'] ='Data Pasien';
+            $data['pemeriksaan'] = $this->Pemeriksaan_model->getAllpemeriksaan();
             // $data['lengkap'] = $this->Pemeriksaan_model->getDatalengkap();
             $this->load->view('template/header', $data);
             $this->load->view('pemeriksaan/index', $data);
+            var_dump($data);
             $this->load->view('template/footer');
         }
 
         public function lengkap(){
             $this->Pemeriksaan_model->tambahpemeriksaan();
             $id = $this->Pemeriksaan_model->getIdperiksa();
-            // if($id == null)
-            // { 
-            //     echo 'idmasuksini';
-            //     $id=0;
-            //     $newId = $id+1;
-            // }else
-            // {
-            //     echo 'idturunsini';
-            //     $newId = $id->idPeriksa + 1;
-            // }
             $newId = $id->idPeriksa;
             echo 'id==';
             echo var_dump($id);
@@ -72,6 +63,16 @@
                     redirect('pemeriksaan');
                 }
             }
-            // echo 'pemeriksaan masuk';
+           
         }
+
+        public function detil($id){
+        echo var_dump($id);
+        $data = 123444444; //$this->Pemeeriksaan_model->detil($_POST['id']);
+        $this->load->view('template/header', $data);
+        $this->load->view('pemeriksaan/detil', $data);
+        var_dump($data);
+        $this->load->view('template/footer');
+        }
+
     }
