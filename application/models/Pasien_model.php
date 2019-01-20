@@ -72,7 +72,6 @@
             ];
             $this->db->where('noRm', $this->input->post('noRm'));
             $this->db->update('alamat', $data);
-
         }
 
     }

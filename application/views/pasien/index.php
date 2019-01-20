@@ -6,7 +6,6 @@
                         Tambah Pasien
                         </button>
     <div class= "table-responsive">
-
         <table class="table table-striped">
             <thead>
                 <tr>

@@ -12,10 +12,8 @@
         {
             // $data['judul'] ='Data Pasien';
             $data['pemeriksaan'] = $this->Pemeriksaan_model->getAllpemeriksaan();
-            // $data['lengkap'] = $this->Pemeriksaan_model->getDatalengkap();
             $this->load->view('template/header', $data);
             $this->load->view('pemeriksaan/index', $data);
-            var_dump($data);
             $this->load->view('template/footer');
         }
 
@@ -38,41 +36,64 @@
             $this->Pemeriksaan_model->vct($newId);
         }
 
+
         public function tambahpemeriksaan()
-        {
-             
-            echo var_dump($_POST);
-            $tcm = $this->Pemeriksaan_model->cektcm();
-            echo '<br>dumptcm';
-            var_dump ($tcm);
-            if($tcm == null){
-                
-                $this->Pemeriksaan_model->tambahtcm();
-                echo 'tcm kosong';
-                $this->lengkap();
-                redirect('pemeriksaan');
-            }else{
-                if ($this->input->post('genxpert') != null){
-                    echo 'tcm masuk1';
+        {    
+            if(isset($_POST['norm'])){
+
+                echo var_dump($_POST);
+                $tcm = $this->Pemeriksaan_model->cektcm();
+                echo '<br>dumptcm';
+                var_dump ($tcm);
+                if($tcm == null){
+                    
                     $this->Pemeriksaan_model->tambahtcm();
+                    echo 'tcm kosong';
                     $this->lengkap();
                     redirect('pemeriksaan');
                 }else{
-                    echo 'else tcm tidak masuk';
-                    $this->lengkap();
-                    redirect('pemeriksaan');
+                    if ($this->input->post('genxpert') != null){
+                        echo 'tcm masuk1';
+                        $this->Pemeriksaan_model->tambahtcm();
+                        $this->lengkap();
+                        redirect('pemeriksaan');
+                    }else{
+                        echo 'else tcm tidak masuk';
+                        $this->lengkap();
+                        redirect('pemeriksaan');
+                    }
                 }
+            }else{
+                echo "isi form";
+                redirect('pemeriksaan');
             }
-           
         }
 
-        public function detil($id){
-        echo var_dump($id);
-        $data = 123444444; //$this->Pemeeriksaan_model->detil($_POST['id']);
-        $this->load->view('template/header', $data);
-        $this->load->view('pemeriksaan/detil', $data);
-        var_dump($data);
-        $this->load->view('template/footer');
+        public function detil(){
+        echo json_encode($this->Pemeriksaan_model->detil($_POST['id']));
+        }
+
+
+        public function autofill(){
+            $norm = $this->input->post('norm');
+            echo json_encode($this->Pemeriksaan_model->autofill($norm));
+
+        }
+
+        public function updatePemeriksaan(){
+            echo '</br>';
+            echo 'newid==';
+            echo var_dump($_POST);
+            echo '</br>';
+            $this->Pemeriksaan_model->updatetcm();
+            $this->Pemeriksaan_model->updatemikroskopis($newId);
+            $this->Pemeriksaan_model->updatelanjutoat($newId);
+            $this->Pemeriksaan_model->updatehasilpengobatan($newId);
+            $this->Pemeriksaan_model->updatestokoat($newId);
+            $this->Pemeriksaan_model->updateterapi($newId);
+            $this->Pemeriksaan_model->updatetescepat($newId);
+            $this->Pemeriksaan_model->updatevct($newId);
+            $this->Pemeriksaan_model->updatepemeriksaan();
         }
 
     }

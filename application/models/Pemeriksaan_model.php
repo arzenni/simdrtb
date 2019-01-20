@@ -38,7 +38,7 @@
       }
 
       public function detil($id){
-         return $this->db->query("SELECT pemeriksaan.idperiksa
+         return $this->db->query("SELECT pemeriksaan.idPeriksa,
          pemeriksaan.noRm,
          pemeriksaan.tglmulai,
          pasien.nama,
@@ -56,7 +56,7 @@
          mikroskopis.nilaikonversi,
          mikroskopis.konversi,
          tcm.bahanperiksa,
-         tcm.kettambahan,
+         tcm.kettambahan as kettcm,
          tcm.rawat,
          tcm.ruang,
          tcm.tglperiksa,
@@ -65,10 +65,10 @@
          pemeriksaan.panduanoat,
          pemeriksaan.noat,
          pemeriksaan.riwayat,
-         vct.tempat,
-         vct.tanggal,
+         vct.tempat as tmptvct,
+         vct.tanggal as tglvct,
          lanjutoat.lanjutoat,
-         lanjutoat.ntempat,
+         lanjutoat.ntempat as tempatloat,
          stokoat.stokoat,
          stokoat.ntempat,
          terapi.terapi,
@@ -104,18 +104,23 @@
          INNER JOIN pasien
            ON pemeriksaan.noRm = pasien.noRm
        GROUP BY pemeriksaan.tglmulai
-       HAVING pemeriksaan.idPeriksa = ". $id . "ORDER BY pemeriksaan.idPeriksa")->row_array();
+       HAVING pemeriksaan.idPeriksa = ". $id . " ORDER BY pemeriksaan.idPeriksa")->row_array();
       }
       
 
+      public function autofill($id){
+         // $id = $this->input->post('noRm')
+         return $this->db->query("SELECT pemeriksaan.noRm, pemeriksaan.tglmulai, pemeriksaan.klasifikasi, pemeriksaan.riwayat, pemeriksaan.panduanoat, pemeriksaan.noat FROM pemeriksaan WHERE pemeriksaan.noRm = ".$id." GROUP BY pemeriksaan.tglmulai ORDER BY pemeriksaan.tglmulai DESC LIMIT 1")->row_array();
+      }
+
+      public function autokomplit(){
+
+      }
 
       
       //============================================================================================
-      //TAMBAH DATA PEMERIKSAAN
+      //C_UD PEMERIKSAAN
       public function tambahpemeriksaan(){
-
-         // $id = $this->db->query("SELECT idPeriksa FROM pemeriksaan GROUP by idPeriksa DESC LIMIT 1")->row();
-         // $idPeriksa = $id + 1;
          $data=[
             //"idPeriksa" => $newid,
             "noRm" => $this->input->post('noRm'),
@@ -130,15 +135,27 @@
             "riwayat" => $this->input->post('riwayat'),
          ];
          $this->db->insert('pemeriksaan', $data);
-
-         // $data=[
-         // "idPeriksa" => $this->input->post('idPeriksa'),
-         // "hasil" => $this->input->post('diagnosa'),
-         // ];
-         // $this->db->insert('diagnosa', $data);
+      }
+      
+      public function updatepemeriksaan(){
+         $data = [
+               "noRm" => $this->input->post('noRm'),
+               "blnpengobatan" => $this->input->post('blnpengobatan'),
+               "idreg" => $this->input->post('genxpert'),
+               "kettambahan" => $this->input->post('kettambahan'),
+               "tglmulai" => $this->input->post('tglmulai'),
+               "klasifikasi" => $this->input->post('klasifikasi'),
+               "thoraks" => $this->input->post('thoraks'),
+               "noat" => $this->input->post('noat'),
+               "panduanoat" => $this->input->post('panduanoat'),
+               "riwayat" => $this->input->post('riwayat'),
+         ];
+    
+         $this->db->where('idPeriksa', $this->input->post('idPeriksa'));
+         $this->db->update('pemeriksaan', $data);
       }
 
-      //TAMBAH DATA TCM
+      //C_UD DATA TCM
       public function tambahtcm(){
          $data=[
             "idreg" => $this->input->post('genxpert'),
@@ -155,9 +172,27 @@
          ];
          $this->db->insert('tcm', $data);
       }
+      
+      public function updatetcm(){
+         $data=[
+            "bahanperiksa" => $this->input->post('bhperiksa'),
+            "hasildetect" => $this->input->post('detect'),
+            "hasilresist" => $this->input->post('resis'),
+            "kethasil" => $this->input->post('kethasiltcm'),
+            "ketklinik" => $this->input->post('ketklinik'),
+            "kettambahan" => $this->input->post('kettambahantcm'),
+            "rawat" => $this->input->post('rawat'),
+            "ruang" => $this->input->post('ruang'),
+            "tglperiksa" => $this->input->post('tcmtgl'),
+            "wktperiksa" => $this->input->post('tcmwkt'),
+         ];
+         $this->db->where('idreg', $this->input->post('genxpert'));
+         $this->db->update('tcm', $data);
+      }
+//===========================================================================
 
       //TAMBAH DATA MIKROSKOPIS
-      public function mikroskopis($id = null){
+      public function mikroskopis(){
          $data=[
             'idPeriksa' => $id,
             "konversi" => $this->input->post('mikkonv'),
@@ -166,19 +201,42 @@
          ];
          $this->db->insert('mikroskopis', $data);
       }
+      
+      public function updatemikroskopis($id = null){
+         $data=[
+            "konversi" => $this->input->post('mikkonv'),
+            "nilaikonversi" => $this->input->post('nilaikonv'),
+            "tglkeluar" => $this->input->post('miktgl'),
+         ];
+         $this->db->where('idPeriksa', $this->input->post('idPeriksa'));
+         $this->db->update('mikroskopis', $data);
+      }
+//==========================================================================
 
-      //TAMBAH LANJUTOAT
-      public function lanjutoat($id=null){
+      //C_UD LANJUTOAT
+
+      public function lanjutoat(){
          $data = [
             "idPeriksa" => $id,
             "lanjutoat" => $this->input->post('lanjutoat'),
-            "ntempat" => $this->input->post('ntempatoat'),
+            "ntempat" => $this->input->post('ntempatloat'),
          ];
          $this->db->insert('lanjutoat', $data);
       }
 
-      //TAMBAH HASIL PENGOBATAN
-      public function hasilpengobatan($id=null){
+      public function updatelanjutoat($id=null){
+         $data = [
+            "lanjutoat" => $this->input->post('lanjutoat'),
+            "ntempat" => $this->input->post('ntempatloat'),
+         ];
+         $this->db->where('idPeriksa', $this->input->post('idPeriksa'));
+         $this->db->update('lanjutoat', $data);
+      }
+
+//==============================================================================
+
+      //C_UD HASIL PENGOBATAN
+      public function hasilpengobatan(){
          $data = [
             "idPeriksa" => $id,
             "hasil" => $this->input->post('hasilpengobatan'),
@@ -187,7 +245,18 @@
          $this->db->insert('hasilpengobatan', $data);
       }
 
-      //TAMBAH STOK OAT
+      public function updatehasilpengobatan($id=null){
+         $data = [
+            "hasil" => $this->input->post('hasilpengobatan'),
+            "tglhenti" => $this->input->post('tglhenti'),
+         ];
+         $this->db->where('idPeriksa', $this->input->post('idPeriksa'));
+         $this->db->update('hasilpengobatan', $data);
+      }
+
+//=================================================================================
+
+      //C_UD STOK OAT
       public function stokoat($id=null)
       {
          $data = [
@@ -198,7 +267,18 @@
          $this->db->insert('stokoat', $data);
       }
 
-      //TAMBAH TERAPI
+      public function updatestokoat()
+      {
+         $data = [
+            "ntempat" => $this->input->post('ntempatoat'),
+            "stokoat" => $this->input->post('stokoat'),
+         ];
+         $this->db->where('idPeriksa', $this->input->post('idPeriksa'));
+         $this->db->update('stokoat', $data);
+      }
+
+//=====================================================================================
+      //C_UD TERAPI
       public function terapi($id=null)
       {
          $data = [
@@ -210,7 +290,19 @@
          $this->db->insert('terapi', $data);
       }
 
-      //TAMBAH TES CEPAT
+      public function updateterapi()
+      {
+         $data = [
+            "dm" => $this->input->post('dm'),
+            "pengobatandm" => $this->input->post('pengobatandm'),
+            "terapi" => $this->input->post('art'),
+         ];
+         $this->db->where('idPeriksa', $this->input->post('idPeriksa'));
+         $this->db->update('terapi', $data);
+      }
+
+//===========================================================================================================
+      //C_UD TES CEPAT
       public function tescepat($id=null)
       {
          $data = [
@@ -218,15 +310,27 @@
             "kultur" => $this->input->post('kultur'),
             "nkultur" => $this->input->post('nkultur'),
             "ntcepat" => $this->input->post('ntcepat'),
-            
             "tanggal" => $this->input->post('tgltcepat'),
-            
             "tempat" => $this->input->post('tcepat'),
          ];
          $this->db->insert('tescepat', $data);
       }
 
-      //TAMBAH TES VCT
+      public function updatetescepat()
+      {
+         $data = [
+            "kultur" => $this->input->post('kultur'),
+            "nkultur" => $this->input->post('nkultur'),
+            "ntcepat" => $this->input->post('ntcepat'),
+            "tanggal" => $this->input->post('tgltcepat'),
+            "tempat" => $this->input->post('tcepat'),
+         ];
+         $this->db->where('idPeriksa', $this->input->post('idPeriksa'));
+         $this->db->update('tescepat', $data);
+      }
+//===========================================================================================================
+
+      //C_UD TES VCT
       public function vct($id=null)
       {
          $data = [
@@ -236,6 +340,17 @@
             "tempat" => $this->input->post('tempatvct'),
          ];
          $this->db->insert('vct', $data);
+      }
+
+      public function updatevct()
+      {
+         $data = [
+            "hasil" => $this->input->post('hasilvct'),
+            "tanggal" => $this->input->post('tglvct'),
+            "tempat" => $this->input->post('tempatvct'),
+         ];
+         $this->db->where('idPeriksa', $this->input->post('idPeriksa'));
+         $this->db->update('vct', $data);
       }
 
       //============================================================================================
@@ -253,7 +368,6 @@
      }
    }
 
-   
 
 //    SELECT `pasien`.`noRm` AS noRm, `pasien`.`nama` AS `noRm`, `pemeriksaan`.`tgl` AS `noRm`, `mikroskopis`.`hasil` AS `noRm`, `mikroskopis`.`tglkeluar` AS `noRm`, `tcm`.`hasil` AS `noRm`, `tcm`.`waktu` AS `noRm`, `pemeriksaan`.`tglront` AS `noRm`, `diagnosa`.`hasil`
 // FROM `pasien`, `pemeriksaan`, `mikroskopis`, `tcm`, `diagnosa`
