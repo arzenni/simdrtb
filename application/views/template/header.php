@@ -9,13 +9,13 @@
     <link rel="stylesheet" href="<?=base_url()?>assets/fonts/font-awesome.min.css">
     <link rel="stylesheet" href="<?=base_url()?>assets/fonts/Alice.css">
     <link rel="stylesheet" href="<?=base_url()?>assets/css/styles.css">
-    <title>Hello, world!</title>
+    <title><?= $title ;?></title>
   </head>
   <body>
     
   <div>
   <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light ">
-    <a class="navbar-brand" href="#">Navbar</a>
+    <a class="navbar-brand" href="#">TB MDR</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -36,8 +36,10 @@
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
             <a class="dropdown-item" href="<?= base_url()?>pemeriksaan">Diagnosa</a>
-            <a class="dropdown-item" href="#">Pencatatan Khusus</a>
-            <a class="dropdown-item" href="#">Something else here</a>
+            <a class="dropdown-item" href="<?= base_url()?>statistik">Statistik</a>
+            <a class="dropdown-item" href="<?= base_url()?>excel_export">Something else here</a>
+            <a class="dropdown-item" href="<?= base_url()?>ruang">Tambah Ruang</a>
+            <a class="dropdown-item" href="<?= base_url()?>tes_tcm">Tes TCM</a>
           </div>
         </li>
       </ul>

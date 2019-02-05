@@ -23,12 +23,8 @@
   margin-top:7px;
 }
 
-#modal-1 {
-  overflow-y:initial;
-}
-
 #modal{
-  overflow: hidden;
+  height: 80%
 }
 
 
@@ -39,19 +35,16 @@
 
 #modal label, #modal button {
   font-size:20px;
-  color:#885c98;
   font-family:'Alice';
 }
 
 .modal-title {
-  color:#885c98;
   font-family:'Alice';
   font-size:35px;
 }
 
 .modal-body {
-  background-color:#9efbda;
-  height: 800px;
+
 }
 
 #modal form {
@@ -65,14 +58,21 @@ body{
 .container {
   width: 80%;
   padding-top: 150px;
-
 }
 
-td {
+thead, td {
  width: 1px ;
  white-space: nowrap;
 }
 
-#tubah, #tombol{
+#tubah, #tombol, .bersih{
   display: none;
+}
+
+.table-responsive{
+  height: 300px;
+}
+
+containertable{
+  height: 400;
 }

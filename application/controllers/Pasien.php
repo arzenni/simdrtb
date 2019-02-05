@@ -5,13 +5,11 @@
         {
             parent::__construct();
             $this->load->model('Pasien_model');
-            $this->load->helper(array('form', 'url'));
-            $this->load->library('form_validation');
         }
 
         public function index()
         {
-            $data['judul'] ='Data Pasien';
+            $data['title'] ='Data Pasien';
             $data['pasien'] = $this->Pasien_model->getAllpasien();
             // $data['lengkap'] = $this->Pasien_model->getDatalengkap();
             $this->load->view("template/header",$data);
@@ -21,16 +19,26 @@
 
         public function tambahpasien()
         {
-            // if($this->Pasien_model->tambahpasien($_POST) > 0){
-            //     redirect();
-            // }
-            // $this->form_validation->set_rules('noRm', 'hoam', 'required');
-            // if ($this->form_validation->run() == FALSE){
-            //     $this->load->view("template/header",$data);
-            //     $this->load->view("pasien/index",$data);
-            //     $this->load->view("template/footer");
-            // } else {
-                $this->Pasien_model->tambahpasien();
+            $data1=[
+                "noRm" => trim($this->input->post('noRm')),
+                "nik" => trim($this->input->post('nik')),
+                "nama" => trim(ucwords($this->input->post('nama'))),
+                "tglahir" => $this->input->post('tglahir'),
+                "tglregistrasi" => $this->input->post('tgregis'),
+                "jnsK" => $this->input->post('jnsK'),
+                "ibu" => trim(ucwords($this->input->post('ibu'))),
+            ];
+            
+            $data2=[
+                "noRm" => trim($this->input->post('noRm')),
+                "dsn" => trim(ucwords($this->input->post('dsn'))),
+                "rt" => trim($this->input->post('rt')),
+                "rw" => trim($this->input->post('rw')),
+                "kelurahan" => trim(ucwords($this->input->post('kelurahan'))),
+                "kecamatan" => trim(ucwords($this->input->post('kecamatan'))),
+                "kota" => trim(ucwords($this->input->post('kota'))),
+            ];
+                $this->Pasien_model->tambahpasien($data1, $data2);
                 redirect('pasien');
             //}
             //   var_dump($_POST);
@@ -50,6 +58,13 @@
         {
             $this->Pasien_model->ubahpasien();
             redirect('pasien');
+        }
+
+        public function hapus($id){
+            $this->Pasien_model->hapuspasien($id);
+            
+            redirect('pasien','refresh');
+            
         }
 
     }
