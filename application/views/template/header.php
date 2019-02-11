@@ -9,12 +9,15 @@
     <link rel="stylesheet" href="<?=base_url()?>assets/fonts/font-awesome.min.css">
     <link rel="stylesheet" href="<?=base_url()?>assets/fonts/Alice.css">
     <link rel="stylesheet" href="<?=base_url()?>assets/css/styles.css">
+    <link href="https://fonts.googleapis.com/css?family=Fahkwang:600|Merriweather" rel="stylesheet">
+    <!-- MDBootstrap Datatables  -->
+    <link href="<?=base_url()?>assets/css/addons/datatables.min.css" rel="stylesheet">
     <title><?= $title ;?></title>
   </head>
   <body>
     
   <div>
-  <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light ">
+  <nav class="navbar fixed-top navbar-expand-lg">
     <a class="navbar-brand" href="#">TB MDR</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -35,7 +38,7 @@
             Pengobatan
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-            <a class="dropdown-item" href="<?= base_url()?>pemeriksaan">Diagnosa</a>
+            <a class="dropdown-item" href="<?= base_url()?>pemeriksaan/">Diagnosa</a>
             <a class="dropdown-item" href="<?= base_url()?>statistik">Statistik</a>
             <a class="dropdown-item" href="<?= base_url()?>excel_export">Something else here</a>
             <a class="dropdown-item" href="<?= base_url()?>ruang">Tambah Ruang</a>

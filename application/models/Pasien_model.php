@@ -2,8 +2,10 @@
 
     class Pasien_model extends CI_Model{
        public function getAllpasien(){
-           $this->db->select("pasien.* , alamat.kecamatan kecamatan");
-           $query = $this->db->get_where('pasien, alamat', 'pasien.noRm = alamat.noRm');
+           $this->db->select("pasien.*, DATE_FORMAT(pasien.tglahir, '%e %M %Y') as tgllahir, alamat.kecamatan kecamatan");
+           $this->db->order_by('wktpencatatan', 'DESC');
+           
+           $query = $this->db->get_where('pasien, alamat', 'pasien.noRm = alamat.noRm'); 
            return $query->result_array();
        }
 
@@ -18,8 +20,9 @@
         }
 
         public function hapuspasien($id){
-            $this->db->where('id', $id);
+            $this->db->where('noRm', $id);
             $this->db->delete('pasien');
+            $this->db->where('noRm', $id);
             $this->db->delete('alamat');
         }
 

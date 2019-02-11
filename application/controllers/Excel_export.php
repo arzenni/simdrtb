@@ -8,11 +8,10 @@ class Excel_export extends CI_Controller {
     $data['title'] ='Report';
     $this->load->model("excel_export_model");
     $data["pasien_data"] = $this->excel_export_model->fetch_data();
-    
     $this->load->view("template/header",$data);
     $this->load->view("excel_export/index", $data);
     $this->load->view("template/footer");
-    }
+}
 
  function action()
  {

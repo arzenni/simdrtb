@@ -11,65 +11,67 @@
 
       public function hapus($id){
          //$id = $this->input->('noRm');
-         $tables = ['mikroskopis', 'vct', 'lanjutoat', 'stokoat', 'terapi', 'hasilpengobatan', 'pemeriksaan'];
+         $tables = ['mikroskopis', 'vct', 'lanjutoat', 'stokoat', 'terapi', 'hasilpengobatan', 'minitcm', 'pemeriksaan'];
          $this->db->where('idPeriksa', $id);
          $this->db->delete($tables);
       }
       
       public function detil($id){
-         return $this->db->query("SELECT pemeriksaan.idPeriksa,
+         return $this->db->query("SELECT
+         pemeriksaan.idPeriksa,
          pemeriksaan.noRm,
-         pemeriksaan.tglmulai,
-         pasien.nama,
-
-         pemeriksaan.kettambahan,
-         vct.hasil as hasilvct,
-         pemeriksaan.blnpengobatan,
-         pemeriksaan.klasifikasi,
-         pemeriksaan.thoraks,
-         mikroskopis.tglkeluar,
-         mikroskopis.nilaikonversi,
-         mikroskopis.konversi,
-
          pemeriksaan.idreg,
+         pemeriksaan.thoraks,
+         pemeriksaan.tglmulai,
          pemeriksaan.panduanoat,
          pemeriksaan.noat,
+         pemeriksaan.klasifikasi,
          pemeriksaan.riwayat,
-         vct.tempat as tmptvct,
-         vct.tanggal as tglvct,
+         pemeriksaan.blnpengobatan,
+         pemeriksaan.kettambahan,
+         pasien.nik,
+         pasien.noRm,
+         pasien.nama,
+         hasilpengobatan.hasil AS hasil,
+         hasilpengobatan.tglhenti,
+         kultur.kultur,
          lanjutoat.lanjutoat,
-         lanjutoat.ntempat as tempatloat,
+         lanjutoat.ntempat AS tempatloat,
+         mikroskopis.tglkeluar,
+         mikroskopis.konversi,
+         mikroskopis.nilaikonversi,
          stokoat.stokoat,
          stokoat.ntempat,
          terapi.terapi,
          terapi.dm,
          terapi.pengobatandm,
-         pasien.noRm,
-         pasien.nik,
-         hasilpengobatan.hasil as hasil,
-         hasilpengobatan.tglhenti,
-         pemeriksaan.idPeriksa,
+         vct.tempat AS tmptvct,
+         vct.tanggal AS tglvct,
+         vct.hasil AS hasilvct,
 
-         kultur.kultur
-       FROM lanjutoat
-         INNER JOIN pemeriksaan
-           ON lanjutoat.idPeriksa = pemeriksaan.idPeriksa
-         INNER JOIN mikroskopis
-           ON mikroskopis.idPeriksa = pemeriksaan.idPeriksa
-         INNER JOIN hasilpengobatan
-           ON hasilpengobatan.idPeriksa = pemeriksaan.idPeriksa
-         INNER JOIN stokoat
-           ON stokoat.idPeriksa = pemeriksaan.idPeriksa
-         INNER JOIN terapi
-           ON terapi.idPeriksa = pemeriksaan.idPeriksa
-         INNER JOIN vct
-           ON vct.idPeriksa = pemeriksaan.idPeriksa
-         INNER JOIN pasien
+         minitcm.tglmtcm,
+         minitcm.mhasildetect,
+         minitcm.mhasilresist
+       FROM pemeriksaan
+         LEFT OUTER JOIN pasien
            ON pemeriksaan.noRm = pasien.noRm
-         INNER JOIN kultur
-           ON kultur.idPeriksa = pemeriksaan.idPeriksa
-       GROUP BY pemeriksaan.tglmulai
-       HAVING pemeriksaan.idPeriksa = ". $id . " ORDER BY pemeriksaan.idPeriksa")->row_array();
+         LEFT OUTER JOIN hasilpengobatan
+           ON hasilpengobatan.idPeriksa = pemeriksaan.idPeriksa
+         LEFT OUTER JOIN kultur
+           ON kultur.idperiksa = pemeriksaan.idPeriksa
+         LEFT OUTER JOIN lanjutoat
+           ON lanjutoat.idPeriksa = pemeriksaan.idPeriksa
+         LEFT OUTER JOIN mikroskopis
+           ON mikroskopis.idPeriksa = pemeriksaan.idPeriksa
+         LEFT OUTER JOIN stokoat
+           ON stokoat.idPeriksa = pemeriksaan.idPeriksa
+         LEFT OUTER JOIN terapi
+           ON terapi.idPeriksa = pemeriksaan.idPeriksa
+         LEFT OUTER JOIN vct
+           ON vct.idPeriksa = pemeriksaan.idPeriksa
+         LEFT OUTER JOIN minitcm
+           ON minitcm.idPeriksa = pemeriksaan.idPeriksa
+       HAVING pemeriksaan.idPeriksa = ".$id)->row_array();
       }
       
 
@@ -110,8 +112,8 @@
        ORDER BY pemeriksaan.tglmulai DESC LIMIT 1")->row_array();
       }
 
-      public function autokomplit($rm){
-         $this->db->like('noRM', $$norm , 'both');
+      public function autokomplit($norm){
+         $this->db->like('noRM', $norm , 'both');
          $this->db->order_by('noRm', 'ASC');
          return $this->db->limit(10)->result();;
          
@@ -180,7 +182,34 @@
          $this->db->update('mikroskopis', $data);
       }
 //==========================================================================
+// MINITCM  
 
+      public function idminitcm(){
+         $this->db->select('idPeriksa');
+         return $this->db->get('minitcm')->row_array();
+      }
+      
+      public function minitcm($id){
+         $data = [
+            "idPeriksa" => $id,
+            "tglmtcm" => $this->input->post('tcmtgl'),
+            "mhasildetect" => $this->input->post('detect'),
+            "mhasilresist" => $this->input->post('resis'), 
+         ];
+         $this->db->insert('minitcm', $data);
+      }
+
+      public function updateminitcm(){
+         $data=[
+            "tglmtcm" => $this->input->post('tcmtgl'),
+            "mhasildetect" => $this->input->post('detect'),
+            "mhasilresist" => $this->input->post('resis'),
+         ];
+         $this->db->where('idPeriksa', $this->input->post('idPeriksa'));
+         $this->db->update('minitcm', $data);
+      }
+
+//==========================================================================
       //C_UD LANJUTOAT
 
       public function lanjutoat($id){

@@ -1,10 +1,25 @@
 
-<div class="container">
-    <button type="button" class="btn btn-primary modaltambah" data-toggle="modal" href="<?php echo base_url(); ?> pasien/tambahpasien" data-target="#modal-1">
+<div class="container rounded">
+<?php if( $this->session->flashdata('pasien')) :  ?>
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <?= $this->session->flashdata('pasien');?>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+<?php elseif( $this->session->flashdata('errpasien')):?>
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <?= $this->session->flashdata('errpasien');?>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+<?php endif;?>
+    <button type="button" class="btn modaltambah buttoncolor" data-toggle="modal" href="<?php echo base_url(); ?> pasien/tambahpasien" data-target="#modal-1">
                         Tambah Pasien
                         </button>
 </div>
-<div class="containerpasien">
+<div class="containerpasien tablediv rounded">
 
     
     <div class="form-group pull-right">
@@ -18,9 +33,12 @@
                     <th>NIK</th>
                     <th>No. Rekam Medis</th>
                     <th>Nama</th>
+                    <th>Tanggal Lahir</th>
                     <th>Jenis Kelamin</th>
                     <th>Kecamatan</th>
-                    <th></th>
+                    <th><span></span></th>
+                    <th><span></span></th>
+                    <th><span></span></th>
                 </tr>
             </thead>
             <tbody>
@@ -39,18 +57,21 @@
                         <?= $psn['nama'];?>
                     </td>
                     <td>
+                        <?= $psn['tgllahir'];?>
+                    </td>
+                    <td>
                         <?= $psn['jnsK'];?>
                     </td>
                     <td> 
                         <?= $psn['kecamatan'];?>
                     </td>
                     <td> 
-                        <button type="button" class="btn btn-primary modaltampil" data-toggle="modal" href="<?php echo base_url(); ?> pasien" data-id="<?= $psn['noRm']; ?>" data-target="#modaldetil">
+                        <button type="button" class="btn buttoncolor modaltampil" data-toggle="modal" href="<?php echo base_url(); ?> pasien" data-id="<?= $psn['noRm']; ?>" data-target="#modaldetil">
                         Detil
                         </button>
                     </td>
                     <td>
-                        <button type="button" class="btn btn-primary modaledit" data-toggle="modal" data-id="<?= $psn['noRm']; ?>" data-target="#modal-1">
+                        <button type="button" class="btn buttoncolor modaledit" data-toggle="modal" data-id="<?= $psn['noRm']; ?>" data-target="#modal-1">
                         edit
                         </button>
                     </td>
@@ -73,7 +94,7 @@
             <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
                     <form action="" method="POST">
-                    <div class="modal-header" style="background-color:#83eded;">
+                    <div class="modal-header">
                         <h4 class="modal-title">Data Pasien</h4><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button></div>
                         <div class="modal-body overflow-body">
                                 <div class="col form-group row"><label class="col-sm-3 col-form-label">No. Rekam Medis&nbsp;</label><input id="inoRm" class="form-control col-sm-8" type="number" name="noRm"></div>
@@ -103,9 +124,9 @@
                                 <div class="col form-group row"><label class="col-form-label col-sm-3">Kecamatan</label><input id="ikecamatan" class="form-control col-sm-8" type="text" name="kecamatan"></div>
                                 <div class="col form-group row"><label class="col-form-label col-sm-3">Kabupaten</label><input id="ikota" class="form-control col-sm-8" type="text" name="kota"></div>    
                         </div>
-                    <div class="modal-footer" style="background-color:#83eded;">
-                    <button class="btn btn-light" type="button" data-dismiss="modal">Close</button>
-                    <button class="btn btn-primary" type="submit" >Save</button>
+                    <div class="modal-footer">
+                    <button class="btn buttoncolor" type="button" data-dismiss="modal">Close</button>
+                    <button class="btn buttoncolor" type="submit" >Save</button>
                     </div>
                             </form>
                  </div>
@@ -127,7 +148,7 @@
                             <div><label class="col-sm-4">NIK</label><label id="nik">Label</label></div>
                             <div><label class="col-sm-4">Jenis Kelamin</label><label id="jnsK">Label</label></div>
                             <div><label class="col-sm-4">Tanggal Lahir</label><label id="tglahir">Label</label></div>
-                            <div><label class="col-sm-4">Nama Ibu</label><label id="ibu">Label</label></div>
+                            <div><label class="col-sm-4">Tanggal Registrasi</label><label id="tgregis">Label</label></div>
                             <div><label class="col-sm-4">Dusun</label><label id="dusun">Label</label></div>
                             <div><label class="col-sm-4">Kelurahan</label><label id="kelurahan">Label</label></div>
                             <div><label class="col-sm-3">RT/RW</label><label id="rt">Label</label><span>/</span><label id="rw">Label</label></div>

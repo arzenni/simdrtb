@@ -1,8 +1,8 @@
-<div class="container forma">
+<div class="container forma rounded">
     <form id="formtcm" action="<?php base_url()?>tes_tcm/tambahtcm" method="post">
             <div style="margin:8px 0px;">
+            <h1 class="text-center" style="padding-top:10px;padding-bottom:35px;">Form Tes Cepat Molekuler</h1>
                     <div class="col-form-label col-sm-4 border-bottom-0 border border-primary rounded-top border-right-0" style="height:40px;padding:2px 16px;">
-                        <div class="col form-group row"><label style="margin:4px;">TCM</label></div>
                     </div>
                     <div class="border border-primary rounded-bottom border-top-0">
                         <div class="col form-group row"><label class="col-form-label col-sm-4">RegGenExpert</label><input class="form-control col-sm-8 dis" type="text" id="fgenxpert" name="genxpert"></div>
@@ -29,19 +29,21 @@
                     class="col form-group row"><label class="col-form-label col-sm-4">Keterangan Tambahan</label><input class="form-control col-sm-8 dis" type="text" id="fkettambahantcm" name="kettambahantcm" style="height:50px;"></div>
                     </div>
                     </div>
-        <button type="submit">Simpan</button>
-        <button class="bersih" type="button">Bersihkan</button>
+        <div class="buttonsub">
+            <button class="buttoncolor btn" type="submit">Simpan</button>
+            <button class="bersih buttoncolor btn" type="button">Bersihkan</button>
+        </div>
     </form>
 </div>
 
-<div >
+<div class="tablediv">
      <div class="form-group pull-right">
             <input type="text" class="search form-control" placeholder="What you looking for?">
         </div>
-<div class="containertable table-responsive">
+<div class="table-responsive rounded">
 <table class = "table table-striped table-hover results" >
      <!-- tampilkanberdasarkan bulan(mulai-hingga), tahun(prtahun), area(kabupaaten) -->
-    <thead class = "thead-dark">
+    <thead>
     <tr>
     <th>#</th>
      <th>RegGenExpert</th>
@@ -53,7 +55,8 @@
      <!-- <th>Keterangan Hasil</th> -->
      <th>Keterangan Klinik</th>
      <th>Keterangan Tambahan</th>
-     <th><span></span></th> <th><span></span></th>
+     <th><span></span></th>
+     <th><span></span></th>
     </tr>
     </thead>
 
@@ -75,7 +78,7 @@
         <td>'.$row['ketklinik'].'</td>
         <td>'.$row['kettambahan'].'</td>
       <td> 
-        <button href=".forma" type="button" class="btn btn-primary detiltcm" data-id="'.$row['idreg'].'">
+        <button href=".forma" type="button" class="btn buttoncolor detiltcm" data-id="'.$row['idreg'].'">
         Detil
         </button>
         </td>

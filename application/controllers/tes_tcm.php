@@ -47,7 +47,7 @@ class tes_tcm extends CI_Controller{
         
         public function detiltcm(){
         //    echo 'detil';
-            $id = $this->input->post('id');
+            $id = $this->input->get('id');
             // var_dump($id);
             // var_dump($this->Tcm_model->detil($id));
             echo json_encode($this->Tcm_model->detil($id));

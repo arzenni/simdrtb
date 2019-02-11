@@ -3,6 +3,10 @@
   margin-left:10px;
 }
 
+#modal{
+  position: absolute;
+}
+
 #modal input.rm {
   width:250px;
 }
@@ -23,56 +27,110 @@
   margin-top:7px;
 }
 
-#modal{
-  height: 80%
+#modal {
+  height:80%;
 }
 
+.modal-body, .modal-title, .modal-header, .modal-footer{
+  background-color:rgb(201, 228, 248)
+}
 
-#modal input, #modal select{
+#modal input, #modal select {
   background-color:#cbf0ff;
+  border-radius: 7px;
 }
 
-
-#modal label, #modal button {
-  font-size:20px;
-  font-family:'Alice';
-}
-
+/* 
 .modal-title {
   font-family:'Alice';
   font-size:35px;
-}
+} */
 
-.modal-body {
-
+.form-group.pull-right {
+  margin-top:12px;
 }
 
 #modal form {
-  margin-bottom: 0px;
+  margin-bottom:0px;
 }
 
-body{
-  background-color:whitesmoke;
+.tablediv {
+  background-color:rgb(201, 228, 248);
+  margin-top:41px;
+  /* width: 98%; */
+  margin-left: 0.55%;
+  margin-right: 0.55%;
+}
+
+.tablediv .pull-right{
+margin-right: 6px;
+}
+
+.buttonsub {
+  padding-left:9px;
+  padding-top:18px;
+}
+
+body {
+  /* background-color:	#ebfdff; */
+  background-color:	rgb(211, 247, 234);
 }
 
 .container {
-  width: 80%;
-  padding-top: 150px;
+  width:80%;
+  padding-top:14px;
+  padding-bottom:15px;
+  margin-top:100px;
+  /* background-color:#d6daf5; */
+  background-color:rgb(201, 228, 248);
 }
 
 thead, td {
- width: 1px ;
- white-space: nowrap;
+  width:1px;
+  white-space:nowrap;
 }
 
-#tubah, #tombol, .bersih{
-  display: none;
+#tubah, #tombol, .bersih {
+  display:none;
 }
 
-.table-responsive{
-  height: 300px;
+a {
+  color:red;
 }
 
-containertable{
-  height: 400;
+.buttoncolor {
+  background-color:#4C5E44;
+  border-radius:6px;
+  color: rgb(243,246,255);
+  font-weight: bolder;
+}
+
+h1, #modal label, #modal button, .modal-title{
+  font-family: 'Fahkwang', sans-serif;;
+}
+
+label, input, select, table td, table th, a, .dropdown-menu .dropdown-item{
+/* //  font-weight: 600; */
+  font-family: 'Merriweather', serif;
+}
+
+.table-responsive {
+  height:800px;
+}
+
+.navbar, table thead, .dropdown-menu{
+  background-color: #343E46;
+}
+
+table thead{
+  color: rgb(243,246,255);
+
+}
+.navbar a{
+  color: rgb(243,246,255)
+}
+
+#sectionform input, #sectionform select, .search, .container form input {
+  background-color:rgb(243,246,255);
+  border-radius:7px;
 }

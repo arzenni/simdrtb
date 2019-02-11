@@ -6,14 +6,18 @@
     <label for="ruang">Ruang</label>
     <input id="ruang" name="ruang" type="text">
     </div>
-    <button type="submit">Tambahkan</button>
+    <button class="btn buttoncolor" type="submit">Tambahkan</button>
 </form>
 
 </div>
 <div class= "container">
-    <table>
+    <table class="table table-striped table-hover">
         <thead>
-            <tr> <th> No. </th> <th> Ruang </th> </tr>
+            <tr> 
+                <th> No. </th> 
+                <th> Ruang </th> 
+                <th> <span></span> </th> 
+            </tr>
         </thead>
         <tbody>
         <?php $i= 1; foreach ($ruang as $ruang):?>

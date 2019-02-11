@@ -26,60 +26,69 @@ $(function(){
         pasientambah = "pasien/tambahpasien"
         pasienubah = "pasien/ubahpasien"
         pasiendetil = "pasien/detilpasien"
+        // ==============================================
         pemeriksaanupdate = "pemeriksaan/updatePemeriksaan"
         pemeriksaandetil = "pemeriksaan/detil";
         pemeriksaantambah = "pemeriksaan/tambahpemeriksaan"
         pemeriksaanautolfill = "pemeriksaan/autofill"
         autocomplete = "pemeriksaan/autocomplete"
+        // =================================================
+        // pemeriksaanupdate = "updatePemeriksaan"
+        // pemeriksaandetil = "detil";
+        // pemeriksaantambah = "tambahpemeriksaan"
+        // pemeriksaanautolfill = "autofill"
+        // autocomplete = "autocomplete"
+        // ====================================================
         detiltcm = "tes_tcm/detiltcm"
         ubahtcm = "tes_tcm/ubahtcm"
         tambahtcm = "tes_tcm/tambahtcm"
 
+        function pasienkosong(){
+            $('#inama').val(null);
+            $('#inoRm').val(null);
+            $('#inik').val(null);
+            $('#ijnsK').val(null);
+            $('#itglahir').val(null);
+            $('#iibu').val(null);
+            $('#idsn').val(null);
+           $('#irt').val(null);
+           $('#irw').val(null);
+           $('#ikecamatan').val(null);
+           $('#ikelurahan').val(null);
+           $('#ikota').val(null);
+        }
+
     $('.modaltambah').on('click', function(){
         $('.modal-title').html('Tambah Pasien');
         $('#modal form').attr('action', pasientambah);
-        $('.modal-footer button[type=submit]').html('Tambah');
-
-                 $('#inama').val(null);
-                 $('#inoRm').val(null);
-                 $('#inik').val(null);
-                 $('#ijnsK').val(null);
-                 $('#itglahir').val(null);
-                 $('#iibu').val(null);
-                 $('#idsn').val(null);
-                $('#irt').val(null);
-                $('#irw').val(null);
-                $('#ikecamatan').val(null);
-                $('#ikelurahan').val(null);
-                $('#ikota').val(null);    
+        $('.modal-footer button[type=submit]').html('Tambah'); 
+        pasienkosong()   
     });
-
-    
 
     $('.modaledit').on('click', function(){
         //$('#modal form').attr();
         // console.log('oukay');
         $('.modal-title').html('Ubah Data Pasien');
+        $('#modal').show();
         $('#modal form').attr('action', pasienubah);
         $('.modal-footer button[type=submit]').html('Simpan');
-    
+        $('.modaledit form input, .modaledit form select').val(null);
         const id = $(this).data('id');
-        // console.log(id);
-
+        console.log(id);
+        pasienkosong();
         $.ajax({
-
             url: pasiendetil,
             data: {id: id},
-            method: 'post',
+            method: 'get',
             dataType: 'json',
             success: function(data){
-                //  console.log(data);
+                 console.log(data);
                  $('#inama').val(data.nama);
                  $('#inoRm').val(data.noRm);
                  $('#inik').val(data.nik);
                  $('#ijnsK').val(data.jnsK);
                  $('#itglahir').val(data.tglahir);
-                 $('#iibu').val(data.ibu);
+                 $('#itgregis').val(data.tglregistrasi);
                  $('#idsn').val(data.dsn);
                 $('#irt').val(data.rt);
                 $('#irw').val(data.rw);
@@ -96,20 +105,23 @@ $(function(){
         $('.modal-title').html('Detil Pasien');
         $('.modal-footer button[type=submit]').html('Tutup');
         const id = $(this).data('id');
+        // console.log(data);
+
+        console.log('tmapil');
         $.ajax({
 
             url: pasiendetil,
             data: {id: id},
-            method: 'post',
+            method: 'get',
             dataType: 'json',
             success: function(data){
-                //  console.log(data);
+                 console.log(data);
                  $('#nama').html(data.nama);
                  $('#noRm').html(data.noRm);
                  $('#nik').html(data.nik);
                  $('#jnsK').html(data.jnsK);
                  $('#tglahir').html(data.tglahir);
-                 $('#ibu').html(data.ibu);
+                 $('#tgregis').html(data.tglregistrasi);
                  $('#dusun').html(data.dsn);
                 $('#rt').html(data.rt);
                 $('#rw').html(data.rw);
@@ -128,6 +140,40 @@ $(function(){
 //================================================================================================
 //DI HALAMAN PEMERIKSAAN/DIAGNOSA
 
+function kosong(){
+    $('#fidPeriksa').val(null);
+    $('#fnorm').val(null);
+    $('#ftglmulai').val(null);
+    $('#fpanduanoat').val(null);
+                 $('#fnoat').val(null);
+                 $('#fklasifikasi').val(null);
+                 $('#friwayat').val(null);
+                 $('#ftempatvct').val(null);
+                 $('#ftglvct').val(null);
+                 $('#fhasilvct').val(null);
+                 $('#fart').val(null);
+                 $('#fdm').val(null);
+                 $('#fpengobatandm').val(null);
+                 $('#fstokoat').val(null);
+                 $('#fntempatoat').val(null);
+                 $('#flanjutoat').val(null);
+                 $('#fntempatloat').val(null);
+                 
+                 $('#fkultur').val(null);
+                 $('#fnkultur').val(null);
+
+                 $('#ftgltcepat').val(null);
+                 $('#fblnpengobatan').val(null);
+                 $('#fmikkonv').val(null);
+                 $('#fnilaikonv').val(null);
+                 $('#fmiktgl').val(null);
+                 $('#fthoraks').val(null);
+                 $('#fhasilpengobatan').val(null);
+                 $('#ftglhenti').val(null);
+                 $('#fkettambahan').val(null);
+    
+}
+
     $('.linkdetil').on('click', function(){ //..tombol detil
 
         const id = $(this).data('id'); //..ambil data id dari tombol
@@ -135,14 +181,15 @@ $(function(){
         $(".dis").prop( "disabled", true ); //..elemen dengan class .dis disable (input form)
         $("#tubah,#tombol").show(); //..munculkan tombol(on/off)
         $('#form1 button[type=submit]').prop("disabled", true); //..tombol submit disable
-        $('#tubah').html('OFF') // tombol menjadi off
+        $('#tubah').html('ON') // tombol menjadi off
         $('#utama').remove() // hilangkan elemen tambahan
         console.log(id)
+        kosong();
         $.ajax({
             
             url: pemeriksaandetil,
             data: {id: id},
-            method: 'post',
+            method: 'get',
             dataType: 'json',
             success: function(data){
                 console.log(data);
@@ -166,6 +213,10 @@ $(function(){
                  $('#flanjutoat').val(data.lanjutoat);
                  $('#fntempatloat').val(data.tempatloat);
                  
+                 $('#ftcmtgl').val(data.tglmtcm);
+                 $('#fdetect').val(data.mhasildetect);
+                 $('#fresis').val(data.mhasilresist);
+
                  $('#fkultur').val(data.kultur);
                  $('#fnkultur').val(data.nkultur);
 
@@ -222,36 +273,8 @@ $(function(){
         $('#form1 button[type=submit]').html('Tambah Data'); //..ubah menjadi tombol ubah data
         //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         //..mengubah input menjadi null
-                $('#fidPeriksa').val(null);
-                 $('#fnorm').val(null);
-                 $('#ftglmulai').val(null);
-                 $('#fpanduanoat').val(null);
-                 $('#fnoat').val(null);
-                 $('#fklasifikasi').val(null);
-                 $('#friwayat').val(null);
-                 $('#ftempatvct').val(null);
-                 $('#ftglvct').val(null);
-                 $('#fhasilvct').val(null);
-                 $('#fart').val(null);
-                 $('#fdm').val(null);
-                 $('#fpengobatandm').val(null);
-                 $('#fstokoat').val(null);
-                 $('#fntempatoat').val(null);
-                 $('#flanjutoat').val(null);
-                 $('#fntempatloat').val(null);
-                 
-                 $('#fkultur').val(null);
-                 $('#fnkultur').val(null);
-
-                 $('#ftgltcepat').val(null);
-                 $('#fblnpengobatan').val(null);
-                 $('#fmikkonv').val(null);
-                 $('#fnilaikonv').val(null);
-                 $('#fmiktgl').val(null);
-                 $('#fthoraks').val(null);
-                 $('#fhasilpengobatan').val(null);
-                 $('#ftglhenti').val(null);
-                 $('#fkettambahan').val(null);
+        kosong();
+                
     });
 
     //------------------------------------------------------------------------------------------
@@ -260,7 +283,7 @@ $(function(){
                                         //.. jika kosong, hanya menampilkan nama dan tglahir dari norm
          $('#utama').remove()
          const norm = $(this).val(); //ambil norm dari input norm
-         // console.log(norm)
+         console.log(norm)
          //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         //buat elemen untuk nama dan tglahir dibawah norm
         let divisi = $("<div>").attr('id','utama').attr('class', "col form-group");
@@ -269,10 +292,11 @@ $(function(){
         let divnama = $("<div>").attr('id', "dnama");
         let labelnama = $("<label>").attr('id',"nama").attr('class','col-form-label col-sm-12')
         //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        // kosong();
         $.ajax({
             url: pemeriksaanautolfill,
             data: {norm: norm},
-            method: 'post',
+            method: 'get',
             dataType: 'json',
             success: function(data){
                 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -284,8 +308,8 @@ $(function(){
                 $("#utama").append(divtglahir);
                 $("#dtglahir").append(labeltglahir.html(data.tglahir))
         //======================================================================
-        $('#fnorm').val(data.noRm);
-        $('#ftglmulai').val(data.tglmulai);
+                    $('#fnorm').val(data.noRm);
+                    $('#ftglmulai').val(data.tglmulai);
                   $('#fpanduanoat').val(data.panduanoat);
                   $('#fnoat').val(data.noat);
                   $('#fklasifikasi').val(data.klasifikasi);
@@ -302,7 +326,7 @@ $(function(){
                  $('#fntempatloat').val(data.tempatloat);
                 }
             });
-            $('#utama').remove()
+            // $('#utama').remove()
     })
 
     $("#fnorm").ready(function(){ //..belum berfungsi untuk auto complete norm
@@ -341,27 +365,29 @@ $(".detiltcm").click(function(){
     // $('#formtcm button[type=submit]').prop("disabled", true);
     // $('input').hide()
     // $('input').val('lokall')
+    $('form input, form select').val(null)
     $.ajax({
         url: detiltcm,
         data: {id: id},
-        method: 'post',
+        method: 'get',
         dataType: 'json',
         success: function(data){
-            console.log(data.noRm);
-             console.log(data);
-            $('#fgenxpert').val(data.idreg);
-            $('#fnrm').val(data.noRm);
-             $('#ftcmtgl').val(data.tglperiksa);
-             $('#ftcmwkt').val(data.wktperiksa);
-             $('#fruang').val(data.ruang);
-             $('#frawat').val(data.rawat);
-             $('#fbhnperiksa').val(data.bahanperiksa);
-             $('#fdetect').val(data.hasildetect);
-             $('#fresis').val(data.hasilresist);
-             $('#fkethasiltcm').val(data.kethasil);
-             $('#fketklinik').val(data.ketklinik);
-             $('#fkettambahantcm').val(data.kettambahan);
+                console.log(data.noRm);
+                console.log(data);
+                $('#fgenxpert').val(data.idreg);
+                $('#fnrm').val(data.noRm);
+                 $('#ftcmtgl').val(data.tglperiksa);
+                 $('#ftcmwkt').val(data.wktperiksa);
+                 $('#fruang').val(data.ruang);
+                 $('#frawat').val(data.rawat);
+                 $('#fbhnperiksa').val(data.bahanperiksa);
+                 $('#fdetect').val(data.hasildetect);
+                 $('#fresis').val(data.hasilresist);
+                 $('#fkethasiltcm').val(data.kethasil);
+                 $('#fketklinik').val(data.ketklinik);
+                 $('#fkettambahantcm').val(data.kettambahan);
             }
+            // console.log('datakososng')
 
     });
 
@@ -381,6 +407,8 @@ $(".detiltcm").click(function(){
 //   ==============================================================
 // TCM
 // ================================================================
+
+
 
 
 });
