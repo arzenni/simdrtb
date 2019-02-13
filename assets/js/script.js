@@ -1,3 +1,5 @@
+
+
 $(function(){        
     let pasientambah = ""
     let pasienubah = ""
@@ -10,38 +12,20 @@ $(function(){
     let detiltcm = ""
     let ubahtcm = ""
     let tambahtcm = "" 
-    
-    // if(bowser.chrome === true){
-    //     pasientambah = "tambahpasien"
-    //     pasienubah = "ubahpasien"
-    //     pasiendetil = "detilpasien"
-    //     pemeriksaanupdate = "updatePemeriksaan"
-    //     pemeriksaandetil = "detil";
-    //     pemeriksaantambah = "tambahpemeriksaan"
-    //     pemeriksaanautolfill = "autofill"
-    //     autocomplete = "autocomplete"
-    //     //console.log(pemeriksaandetil);
-        
-    // } else {
-        pasientambah = "pasien/tambahpasien"
-        pasienubah = "pasien/ubahpasien"
-        pasiendetil = "pasien/detilpasien"
+    let url= window.location.href
+        pasientambah = url+"/tambahpasien"
+        pasienubah = url+"/ubahpasien"
+        pasiendetil = url+"/detilpasien"
         // ==============================================
-        pemeriksaanupdate = "pemeriksaan/updatePemeriksaan"
-        pemeriksaandetil = "pemeriksaan/detil";
-        pemeriksaantambah = "pemeriksaan/tambahpemeriksaan"
-        pemeriksaanautolfill = "pemeriksaan/autofill"
-        autocomplete = "pemeriksaan/autocomplete"
-        // =================================================
-        // pemeriksaanupdate = "updatePemeriksaan"
-        // pemeriksaandetil = "detil";
-        // pemeriksaantambah = "tambahpemeriksaan"
-        // pemeriksaanautolfill = "autofill"
-        // autocomplete = "autocomplete"
+        pemeriksaanupdate = url+"/updatePemeriksaan"
+        pemeriksaandetil = url+"/detil";
+        pemeriksaantambah = url+"/tambahpemeriksaan"
+        pemeriksaanautolfill = url+"/autofill"
+        autocomplete = url+"/autocomplete"
         // ====================================================
-        detiltcm = "tes_tcm/detiltcm"
-        ubahtcm = "tes_tcm/ubahtcm"
-        tambahtcm = "tes_tcm/tambahtcm"
+        detiltcm = url+"/detiltcm"
+        ubahtcm = url+"/ubahtcm"
+        tambahtcm = url+"/tambahtcm"
 
         function pasienkosong(){
             $('#inama').val(null);
@@ -49,6 +33,7 @@ $(function(){
             $('#inik').val(null);
             $('#ijnsK').val(null);
             $('#itglahir').val(null);
+            $('#tgregis').val(null);
             $('#iibu').val(null);
             $('#idsn').val(null);
            $('#irt').val(null);
@@ -66,8 +51,6 @@ $(function(){
     });
 
     $('.modaledit').on('click', function(){
-        //$('#modal form').attr();
-        // console.log('oukay');
         $('.modal-title').html('Ubah Data Pasien');
         $('#modal').show();
         $('#modal form').attr('action', pasienubah);
@@ -89,6 +72,7 @@ $(function(){
                  $('#ijnsK').val(data.jnsK);
                  $('#itglahir').val(data.tglahir);
                  $('#itgregis').val(data.tglregistrasi);
+                 $('#iibu').val(data.ibu);
                  $('#idsn').val(data.dsn);
                 $('#irt').val(data.rt);
                 $('#irw').val(data.rw);
@@ -116,13 +100,14 @@ $(function(){
             dataType: 'json',
             success: function(data){
                  console.log(data);
-                 $('#nama').html(data.nama);
-                 $('#noRm').html(data.noRm);
-                 $('#nik').html(data.nik);
-                 $('#jnsK').html(data.jnsK);
-                 $('#tglahir').html(data.tglahir);
-                 $('#tgregis').html(data.tglregistrasi);
-                 $('#dusun').html(data.dsn);
+                $('#nama').html(data.nama);
+                $('#noRm').html(data.noRm);
+                $('#nik').html(data.nik);
+                $('#jnsK').html(data.jnsK);
+                $('#tglahir').html(data.tglahir);
+                $('#tgregis').html(data.tglregistrasi);
+                $('#ibu').html(data.ibu);
+                $('#dusun').html(data.dsn);
                 $('#rt').html(data.rt);
                 $('#rw').html(data.rw);
                 $('#kecamatan').html(data.kecamatan);
@@ -171,7 +156,6 @@ function kosong(){
                  $('#fhasilpengobatan').val(null);
                  $('#ftglhenti').val(null);
                  $('#fkettambahan').val(null);
-    
 }
 
     $('.linkdetil').on('click', function(){ //..tombol detil
@@ -186,7 +170,6 @@ function kosong(){
         console.log(id)
         kosong();
         $.ajax({
-            
             url: pemeriksaandetil,
             data: {id: id},
             method: 'get',
@@ -201,7 +184,6 @@ function kosong(){
                  $('#fnoat').val(data.noat);
                  $('#fklasifikasi').val(data.klasifikasi);
                  $('#friwayat').val(data.riwayat);
-
                  $('#ftempatvct').val(data.tmptvct);
                  $('#ftglvct').val(data.tglvct);
                  $('#fhasilvct').val(data.hasilvct);
@@ -285,12 +267,6 @@ function kosong(){
          const norm = $(this).val(); //ambil norm dari input norm
          console.log(norm)
          //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-        //buat elemen untuk nama dan tglahir dibawah norm
-        let divisi = $("<div>").attr('id','utama').attr('class', "col form-group");
-        let divtglahir = $("<div>").attr('id', "dtglahir");
-        let labeltglahir = $("<label>").attr('id',"tglahir").attr('class','col-form-label col-sm-12')
-        let divnama = $("<div>").attr('id', "dnama");
-        let labelnama = $("<label>").attr('id',"nama").attr('class','col-form-label col-sm-12')
         //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         // kosong();
         $.ajax({
@@ -302,14 +278,17 @@ function kosong(){
                 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
                 //tambah elemen dibawah input norm untuk menampilkan nama dan tglahir
                 console.log(data);
-                $("#rekam").append(divisi);
-                $("#utama").append(divnama);
-                $("#dnama").append(labelnama.html(data.nama))
-                $("#utama").append(divtglahir);
-                $("#dtglahir").append(labeltglahir.html(data.tglahir))
+                $("#rekam").after(`<div id="utama" class = "col form-group">
+                <div class = "col-sm-12">
+                    <label class = "col-form-label col-sm-4">Nama</label><label class = "col-form-label col-sm-8">${data.nama}</label>
+                    </div> 
+                    <div>
+                    <label class = "col-form-label col-sm-4">Tanggal Lahir</label><label class = "col-form-label col-sm-8">${data.tglahir}</label>
+                    </div>
+                </div>`);
         //======================================================================
-                    $('#fnorm').val(data.noRm);
-                    $('#ftglmulai').val(data.tglmulai);
+                $('#fnorm').val(data.noRm);
+                $('#ftglmulai').val(data.tglmulai);
                   $('#fpanduanoat').val(data.panduanoat);
                   $('#fnoat').val(data.noat);
                   $('#fklasifikasi').val(data.klasifikasi);
@@ -328,13 +307,43 @@ function kosong(){
             });
             // $('#utama').remove()
     })
+    $('#fnrm').on('keyup', function(){ //..autofill kolom berdasarkan data pemeriksaan terakhir
+                                        //.. jika kosong, hanya menampilkan nama dan tglahir dari norm
+         $('#utama').remove()
+         const norm = $(this).val(); //ambil norm dari input norm
+         console.log(norm)
+         //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        //buat elemen untuk nama dan tglahir dibawah norm
+        //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~    
+        // kosong();
+        $.ajax({
+            url: pemeriksaanautolfill,
+            data: {norm: norm},
+            method: 'get',
+            dataType: 'json',
+            success: function(data){
+                //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+                //tambah elemen dibawah input norm untuk menampilkan nama dan tglahir
+                console.log(data);
+                $("#tcmrm").after(`<div id="utama" class = "col form-group">
+                <div class = "col-sm-12">
+                    <label class = "col-form-label col-sm-4">Nama</label><label class = "col-form-label col-sm-8">${data.nama}</label>
+                    </div> 
+                    <div>
+                    <label class = "col-form-label col-sm-4">Tanggal Lahir</label><label class = "col-form-label col-sm-8">${data.tglahir}</label>
+                    </div>
+                </div>`);
+                //======================================================================
+                }
+            });
+    })
 
-    $("#fnorm").ready(function(){ //..belum berfungsi untuk auto complete norm
-        $( "#fnorm" ).autocomplete({
-          source: autocomplete
-        });
+    // $("#fnorm").ready(function(){ //..belum berfungsi untuk auto complete norm
+    //     $( "#fnorm" ).autocomplete({
+    //       source: autocomplete
+    //     });
 
-    });
+    // });
 
 
     //END HALAMAN DIAGNOSA/PEMERIKSAAN
@@ -361,10 +370,6 @@ $(".detiltcm").click(function(){
     $('form').attr("action", ubahtcm);
     $('.bersih').show()
     const id = $(this).data('id');
-    // $('#formtcm button[type=submit]').html('buaya')
-    // $('#formtcm button[type=submit]').prop("disabled", true);
-    // $('input').hide()
-    // $('input').val('lokall')
     $('form input, form select').val(null)
     $.ajax({
         url: detiltcm,
@@ -387,8 +392,6 @@ $(".detiltcm").click(function(){
                  $('#fketklinik').val(data.ketklinik);
                  $('#fkettambahantcm').val(data.kettambahan);
             }
-            // console.log('datakososng')
-
     });
 
 });
@@ -412,3 +415,58 @@ $(".detiltcm").click(function(){
 
 
 });
+
+
+
+
+
+
+
+
+
+// let dataArray = [20,10,22,55,23,45]
+// let width = 500
+// let height = 500
+// let widthScale = d3.scaleLinear()
+//                 .domain([0, 45])
+//                 .range([0, width]);
+
+// let color = d3.scaleLinear()
+//                 .domain([0, 45])
+//                 .range(['red', 'yellow']);
+
+// let axis = d3.svg.axis()
+//                 .scale(widthScale);
+
+// let canvas = d3.select("#hasilpengobatan")
+//                 .append("svg")
+//                 .attr('width', width )
+//                 .attr('height', height )
+//                 .append('g')
+//                 .attr('transform', 'translate(50, 50)');
+                
+// let rect = canvas.selectAll("rect")
+//                 .data(dataArray)
+//                 .enter()
+//                 .append('rect')
+//                 .attr('width', function(d){ return widthScale(d);})
+//                 .attr('height', 50)
+//                 .attr('y', function(d, i){return i * 100})
+//                 .attr('fill', function(d){return color(d) })
+
+                // let circle = canvas.append('circle')
+                //                 .attr('cx', 250)
+                //                 .attr('cy', 250)
+                //                 .attr('r', 50)
+                //                 .attr('fill', "red");
+                    // .attr('x', )
+                    // .attr('rx', )
+                    // .attr('ry', );
+
+// let line  = canvas.append('line')
+//                 .attr('x1', 30)
+//                 .attr('y1', 100)
+//                 .attr('x2', 250)
+//                 .attr('y2', 300)
+//                 .attr('stroke', 'aqua')
+//                 .attr('stroke-width', 10)

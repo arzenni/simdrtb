@@ -10,10 +10,10 @@
 
         public function index()
         {
-            $data['title'] ='Data Pasien';
-            $data['pasien'] = $this->Pasien_model->getAllpasien();
-            // var_dump($data['pasien']);
-            // $data['lengkap'] = $this->Pasien_model->getDatalengkap();
+            $data=[
+                'title' => 'Data Pasien',
+                'pasien' => $this->Pasien_model->getAllpasien()
+            ];
             $this->load->view("template/header",$data);
             $this->load->view("pasien/index",$data);
             $this->load->view("template/footer");
@@ -22,12 +22,16 @@
         public function tambahpasien()
         {
             $norm = trim($this->input->post('noRm'));
-            if($norm != null){
+            if($norm != null)
+            {
                 $cek = $this->Pasien_model->getbyId($norm);
-                if($cek != null){
-                    $this->session->set_flashdata('errpasien', 'Gagal Ditambahkan, Nomor Rekam Medis Sudah Ada');
+                if($cek != null)
+                {
+                    $this->session->set_flashdata('pasien', 'Gagal Ditambahkan, Nomor Rekam Medis Sudah Ada');
                     redirect('pasien');
-                }else{
+                }
+                else
+                {
                     $wkt = date('Y-m-d H:i:s');
                     $data1=[
                         "noRm" => trim($this->input->post('noRm')),
@@ -39,7 +43,6 @@
                         "ibu" => trim(ucwords($this->input->post('ibu'))),
                         "wktpencatatan" => $wkt,
                     ];
-                    
                     $data2=[
                         "noRm" => trim($this->input->post('noRm')),
                         "dsn" => trim(ucwords($this->input->post('dsn'))),
@@ -53,38 +56,31 @@
                         $this->session->set_flashdata('pasien', 'Berhasil Ditambahkan');
                         redirect('pasien');
                 }
-            }else{
-                $this->session->set_flashdata('errpasien', 'Gagal Ditambahkan, Nomor Rekam Medis Kosong atau Terjadi Kesalahan');
+            }
+            else
+            {
+                $this->session->set_flashdata('pasien', 'Gagal Ditambahkan, Nomor Rekam Medis Kosong atau Terjadi Kesalahan');
                 redirect('pasien');
             }
-
-            //}
-            //   var_dump($_POST);
         }
 
         public function detilpasien()
         {
-            // echo 'siyaph';
-            // echo $_POST['id'];
             $id = $this->input->get('id');
             echo json_encode($this->Pasien_model->getbyId($id));
-            //$data['']
-            //$data['pasien'] = $this->Pasien_model->getbyIdpasien($id);
         }
 
         public function ubahpasien()
         {
             $this->Pasien_model->ubahpasien();
-            $this->session->set_flashdata('pasien', 'Diubah');
-            redirect('pasien');
+            $this->session->set_flashdata('pasien', 'Data Berhasil Diubah');
+            redirect('pasien','refresh');
         }
 
         public function hapus($id){
             $this->Pasien_model->hapuspasien($id);
-            $this->session->set_flashdata('pasien', 'Dihapus');
-            
+            $this->session->set_flashdata('pasien', 'Data Berhasil Dihapus');
             redirect('pasien','refresh');
-            
         }
 
     }

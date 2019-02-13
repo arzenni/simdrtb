@@ -5,13 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="<?=base_url()?>assets/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="<?=base_url()?>assets/fonts/font-awesome.min.css">
-    <link rel="stylesheet" href="<?=base_url()?>assets/fonts/Alice.css">
-    <link rel="stylesheet" href="<?=base_url()?>assets/css/styles.css">
+    <link rel="stylesheet" href="<?=site_url()?>assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="<?=site_url()?>assets/fonts/font-awesome.min.css">
+    <link rel="stylesheet" href="<?=site_url()?>assets/fonts/Alice.css">
+    <link rel="stylesheet" href="<?=site_url()?>assets/css/styles.css">
     <link href="https://fonts.googleapis.com/css?family=Fahkwang:600|Merriweather" rel="stylesheet">
+
+    <script src="https://www.google.com/jsapi"></script>
+    <script src="https://d3js.org/d3.v5.js"></script>
+
     <!-- MDBootstrap Datatables  -->
-    <link href="<?=base_url()?>assets/css/addons/datatables.min.css" rel="stylesheet">
+    <link href="<?=site_url()?>assets/css/addons/datatables.min.css" rel="stylesheet">
     <title><?= $title ;?></title>
   </head>
   <body>
@@ -38,7 +42,7 @@
             Pengobatan
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-            <a class="dropdown-item" href="<?= base_url()?>pemeriksaan/">Diagnosa</a>
+            <a class="dropdown-item" href="<?= base_url()?>pemeriksaan">Diagnosa</a>
             <a class="dropdown-item" href="<?= base_url()?>statistik">Statistik</a>
             <a class="dropdown-item" href="<?= base_url()?>excel_export">Something else here</a>
             <a class="dropdown-item" href="<?= base_url()?>ruang">Tambah Ruang</a>

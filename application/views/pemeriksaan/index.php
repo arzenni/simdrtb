@@ -5,21 +5,12 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?=$title?></title>
-    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="assets/css/bootstrap-grid.css">
-    <link rel="stylesheet" href="assets/css/bootstrap-grid.min.css">
-    <link rel="stylesheet" href="assets/css/bootstrap-reboot.css">
-    <link rel="stylesheet" href="assets/css/bootstrap-reboot.min.css">
-    <link rel="stylesheet" href="assets/css/bootstrap.css">
-    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
-    <link rel="stylesheet" href="assets/css/styles-1.css">
-    <link rel="stylesheet" href="assets/css/styles.css">
 </head>
 
 <body><div class="container rounded">
     <div id="sectionform" class="section forma">
         <h1 class="text-center" style="padding-top:10px;padding-bottom:35px;">Form Data Pengobatan</h1>
-        <form id="form1" action="<?=base_url();?>pemeriksaan/tambahpemeriksaan" method="POST">
+        <form id="form1" action="<?=site_url();?>pemeriksaan/tambahpemeriksaan" method="POST">
             <?php if( $this->session->flashdata('pemeriksaan')) :  ?>
                 <div class="alert alert-warning alert-dismissible fade show" role="alert">
                     <?= $this->session->flashdata('pemeriksaan');?>
@@ -38,10 +29,6 @@
             
                 <div class="form-row">
                     <div class="col">
-                        <?php if( $this->session->flashdata('hapus')) :  ?>
-                            <div class= "col-md-6"> Berhasil <?= $this->session->flashdata('hapus');?>
-                            </div>
-                        <?php endif;?>
                         <div>
                         <input type="hidden" id="fidPeriksa" name="idPeriksa">
                             <div id="rekam" class="col form-group row"><label class="col-form-label col-sm-4">No. Rekam Medis</label><input class="form-control col-sm-8 dis" type="text" id="fnorm" name="noRm"></div>
@@ -225,7 +212,7 @@
                             </button>
                     </td>
                     <td>
-                        <a href="<?= base_url();?>pemeriksaan/hapus/<?= $p['idPeriksa'];?>">
+                        <a href="<?= site_url();?>pemeriksaan/hapus/<?= $p['idPeriksa'];?>">
                         Hapus
                         </a>
                     </td>
@@ -251,8 +238,6 @@
      xx tombol clear untuk membersihkan data dan mengembalikan form serta tombol ke fungsi tambah
 
 clear  aktifkanubah  tambah/ubah/hapus-->
-    <script src="assets/js/jquery.min.js"></script>
-    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
 </body>
 
 </html>

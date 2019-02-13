@@ -115,7 +115,7 @@ label, input, select, table td, table th, a, .dropdown-menu .dropdown-item{
 }
 
 .table-responsive {
-  height:800px;
+  height:600px;
 }
 
 .navbar, table thead, .dropdown-menu{
@@ -133,4 +133,12 @@ table thead{
 #sectionform input, #sectionform select, .search, .container form input {
   background-color:rgb(243,246,255);
   border-radius:7px;
+}
+
+.chart {
+  width: 100%; 
+  min-height: 450px;
+}
+.row {
+  margin:0 !important;
 }

@@ -11,14 +11,15 @@
 
         public function index(){
             $data['title'] = 'Statistik Pasien';
-            $data['hitunglanjutoat'] = $this->Statistik_model->hitunglanjutoat();
+            $data = [
+                'title' => 'Statistik Pasien',
+                'hitunglanjutoat' => $this->Statistik_model->hitunglanjutoat(),
+                'hitungvct' => $this->Statistik_model->hitungvct(),
+                'hitungmik' => $this->Statistik_model->hitungmik(),
+                'hitungtcm' => $this->Statistik_model->hitungtcm(),
+                'hitungterapi' => $this->Statistik_model->hitungterapi()
+            ];
             // $data['hitungstokoat'] = $this->Statistik_model->hitungstokoat();
-            $data['hitungvct'] = $this->Statistik_model->hitungvct();
-            $data['hitungmik'] = $this->Statistik_model->hitungmik();
-            $data['hitungtcm'] = $this->Statistik_model->hitungtcm();
-            $data['hitungterapi'] = $this->Statistik_model->hitungterapi();
-
-            echo var_dump($data);
             $this->load->view('template/header', $data);
             $this->load->view('statistik/index', $data);
             $this->load->view('template/footer');

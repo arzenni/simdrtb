@@ -64,12 +64,18 @@
             $this->db->delete('tcm', array('idreg' => $reg));
       }
 
-      public function cektcm(){
-        return $this->db->query("SELECT idreg FROM tcm GROUP by idreg DESC LIMIT 1")->row();
+      public function cektcm($genid){
+        return $this->db->query("SELECT idreg FROM tcm WHERE idreg= " . $genid)->row();
        }
 
        public function getAllruang(){
          return $this->db->query("SELECT * FROM ruang")->result_array();
      }
 
-    }
+     public function autofill($id){
+      $this->db->select('nama, tglahir');
+      $this->db->where('norm', $id);
+      return $this->db->get('pasien')->row_array();
+   }
+
+}

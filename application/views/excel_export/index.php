@@ -1,5 +1,5 @@
 <div class="container box">
-  <h3 align="center">Data Lengkap Pengobatan</h3>
+  <h1 align="center">Data Lengkap Pengobatan</h1>
   <br />
   <div class="table-responsive">
    <table class="table table-bordered">

@@ -2,6 +2,12 @@
 <table class="table table-bordered">
      <!-- tampilkanberdasarkan bulan(mulai-hingga), tahun(prtahun), area(kabupaaten) -->
     <!--vct-->
+
+<div id='hasilpengobatan'>
+
+</div>
+
+
     <label for="">VCT</label>
     <tr>
      <th>Bulan</th>

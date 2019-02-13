@@ -66,7 +66,7 @@
                         <?= $psn['kecamatan'];?>
                     </td>
                     <td> 
-                        <button type="button" class="btn buttoncolor modaltampil" data-toggle="modal" href="<?php echo base_url(); ?> pasien" data-id="<?= $psn['noRm']; ?>" data-target="#modaldetil">
+                        <button type="button" class="btn buttoncolor modaltampil" data-toggle="modal"  data-id="<?= $psn['noRm']; ?>" data-target="#modaldetil">
                         Detil
                         </button>
                     </td>
@@ -76,7 +76,7 @@
                         </button>
                     </td>
                     <td>
-                        <a href= "<?= base_url();?>pasien/hapus/<?= $psn['noRm'];?>" >
+                        <a href= "<?= site_url();?>pasien/hapus/<?= $psn['noRm'];?>" >
                         Hapus
                         </a>
                     </td>
@@ -112,6 +112,7 @@
                                 </div>
                                 <div class="col form-group row"><label class="col-sm-3 col-form-label">Tanggal Lahir</label><input id="itglahir" class="form-control col-sm-8" type="date" name="tglahir"></div>
                                 <div class="col form-group row"><label class="col-sm-3 col-form-label">Tanggal Registrasi</label><input id="itgregis" class="form-control col-sm-8" type="date" name="tgregis"></div>
+                                <div class="col form-group row"><label class="col-sm-3 col-form-label">Ibu Kandung</label><input id="iibu" class="form-control col-sm-8" type="text" name="ibu"></div>
                                 <div class="col form-group row"><label class="col-form-label col-sm-3">Alamat</label></div>
                                 <div class="col form-group row"><label class="col-form-label col-sm-3">Dusun</label><input id="idsn" class="form-control col-sm-8" type="text" name="dsn"></div>
                                 <div class="col form-group row"><label class="col-form-label col-sm-3">Kelurahan</label><input id="ikelurahan" class="form-control col-sm-8" type="text" name="kelurahan"></div>
@@ -125,8 +126,8 @@
                                 <div class="col form-group row"><label class="col-form-label col-sm-3">Kabupaten</label><input id="ikota" class="form-control col-sm-8" type="text" name="kota"></div>    
                         </div>
                     <div class="modal-footer">
-                    <button class="btn buttoncolor" type="button" data-dismiss="modal">Close</button>
-                    <button class="btn buttoncolor" type="submit" >Save</button>
+                    <button class="btn buttoncolor" type="button" data-dismiss="modal">Tutup</button>
+                    <button class="btn buttoncolor" type="submit">Save</button>
                     </div>
                             </form>
                  </div>
@@ -149,6 +150,7 @@
                             <div><label class="col-sm-4">Jenis Kelamin</label><label id="jnsK">Label</label></div>
                             <div><label class="col-sm-4">Tanggal Lahir</label><label id="tglahir">Label</label></div>
                             <div><label class="col-sm-4">Tanggal Registrasi</label><label id="tgregis">Label</label></div>
+                            <div><label class="col-sm-4">Ibu Kandung</label><label id="ibu">Label</label></div>
                             <div><label class="col-sm-4">Dusun</label><label id="dusun">Label</label></div>
                             <div><label class="col-sm-4">Kelurahan</label><label id="kelurahan">Label</label></div>
                             <div><label class="col-sm-3">RT/RW</label><label id="rt">Label</label><span>/</span><label id="rw">Label</label></div>
@@ -157,7 +159,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="modal-footer"><button class="btn btn-light" type="button" data-dismiss="modal">Close</button><button class="btn btn-primary" type="submit">Save</button></div>
+                <div class="modal-footer"><button class="btn buttoncolor" type="button" data-dismiss="modal">Tutup</button></div>
             </div>
         </div>
     </div>
